@@ -110,6 +110,13 @@
   .daybtn[data-day="attractions"]{margin-left:10px}
   .daybtn[data-day="attractions"].active{background:#7d5ba6;color:#fff;border-color:#7d5ba6}
   .daybtn[data-day="food"].active{background:#b23b2e;color:#fff;border-color:#b23b2e}
+  .legbar{margin:2px 0 12px}
+  .legchip{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 9px;font-size:12.5px;font-weight:600;color:var(--muted);border-style:dashed}
+  .legflow{display:flex;flex-wrap:wrap;align-items:center;gap:5px 7px}
+  .legstop{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--ink)}
+  .legstop .n{width:18px;height:18px;border-radius:9px;color:#fff;font-weight:800;font-size:10.5px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .legtime{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+  .legtime::after{content:"›";margin-left:7px;opacity:.5}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -401,23 +408,28 @@
 <!-- ================= MAP ================= -->
 <section class="panel" id="map">
   <h2 class="sec">Map</h2>
-  <p class="lead">The numbered day routes are the plan. Toggle <b>✨ Attractions</b> or <b>🍴 Food</b> to overlay <b>alternative options &amp; extras</b> (not part of the set itinerary) — handy for seeing what's near each day. Food is colour-coded: groceries, coffee/snacks, restaurants. Tap any pin to open it in Google Maps.</p>
+  <ul class="lead" style="list-style:none;padding:0;margin:4px 4px 16px">
+    <li>• Tap on each day to see our route &amp; drive times</li>
+    <li>• Toggle <b>✨ Extras</b> or <b>🍴 Food</b> to overlay alternative options</li>
+    <li>• Tap any pin to open it in Google Maps</li>
+  </ul>
   <div class="daybar">
     <button class="daybtn active" data-day="all">All</button>
     <button class="daybtn" data-day="thu">Thu</button>
     <button class="daybtn" data-day="fri">Fri</button>
     <button class="daybtn" data-day="sat">Sat</button>
     <button class="daybtn" data-day="sun">Sun</button>
-    <button class="daybtn" data-day="attractions">✨ Attractions</button>
-    <button class="daybtn" data-day="food">🍴 Food</button>
+    <button class="daybtn" data-day="attractions">✨ Extras</button>
+    <button class="daybtn" data-day="food">🍴 Other food spots</button>
   </div>
+  <div id="legbar" class="legbar"></div>
   <div id="tripmap"></div>
   <div class="legend" style="margin-top:12px">
     <span><i class="dot" style="background:#4a6d8c"></i>Thu · arrive</span>
     <span><i class="dot" style="background:#3f7d5a"></i>Fri · Grand Teton</span>
     <span><i class="dot" style="background:#c47a2c"></i>Sat · float &amp; night out</span>
     <span><i class="dot" style="background:#5a8aa0"></i>Sun · fly home</span>
-    <span><i class="dot" style="background:#7d5ba6"></i>Attractions</span>
+    <span><i class="dot" style="background:#7d5ba6"></i>Extras</span>
     <span><i class="dot" style="background:#4c9a2a"></i>Groceries</span>
     <span><i class="dot" style="background:#8b5a2b"></i>Coffee/snacks</span>
     <span><i class="dot" style="background:#c0392b"></i>Restaurants</span>
@@ -567,12 +579,17 @@
     });
     renderMap(true);
   }
+  function shortName(n){
+    let s=n.split(' — ')[0].split(' (')[0].split(',')[0].trim();
+    s=s.replace(/ barns$/,'').replace(/ boat dock$/,'').replace(/ summit$/,'').replace('Jackson Hole Airport','JAC').replace('Snake River float','Float · Moose');
+    return s;
+  }
   function renderMap(fit){
     const pts=[];
     Object.keys(DAYS).forEach(function(k){
       if(curDay==='all'||curDay===k){ dayLayers[k].addTo(map); DAYS[k].stops.forEach(function(s){pts.push([s[1],s[2]]);}); }
       else { map.removeLayer(dayLayers[k]); }
-      if(curDay===k){ dayLegs[k].addTo(map); } else { map.removeLayer(dayLegs[k]); }
+      map.removeLayer(dayLegs[k]);
     });
     if(attractionsOn){ extrasLayer.addTo(map); } else { map.removeLayer(extrasLayer); }
     if(foodOn){ foodLayer.addTo(map); } else { map.removeLayer(foodLayer); }
@@ -581,6 +598,18 @@
       else if(b.dataset.day==='food'){ b.classList.toggle('active', foodOn); }
       else { b.classList.toggle('active', b.dataset.day===curDay); }
     });
+    const lb=document.getElementById('legbar');
+    if(lb){
+      if(curDay==='all'){ lb.innerHTML=''; }
+      else {
+        const d=DAYS[curDay]; let html='';
+        d.stops.forEach(function(s,i){
+          html+='<span class="legstop"><b class="n" style="background:'+d.color+'">'+(i+1)+'</b>'+shortName(s[0])+'</span>';
+          if(s[3] && d.stops[i+1]){ html+='<span class="legtime">'+s[3]+'</span>'; }
+        });
+        lb.innerHTML='<div class="legflow">'+html+'</div>';
+      }
+    }
     if(fit && pts.length) map.fitBounds(pts,{padding:[30,30]});
   }
   // ---- Booking checklist (shared via Supabase) ----
