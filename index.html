@@ -72,6 +72,12 @@
   .two-col .col-h{font-weight:800;margin-bottom:3px}
   .two-col .col.nonrodeo{border-left:3px solid var(--c-food);padding-left:14px}
   tr.split td.desc{border-left-color:var(--c-activity)}
+  details.more{margin-top:7px}
+  details.more>summary{cursor:pointer;color:var(--sky);font-size:12.5px;font-weight:700;list-style:none;display:inline-flex;align-items:center;gap:5px}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"＋"}
+  details.more[open]>summary::before{content:"–"}
+  details.more .body{margin-top:6px;color:var(--muted);font-size:13px;background:#f3ede0;border-radius:8px;padding:9px 11px}
   .flag{background:#fbe7d8;border:1px solid #efc79a;color:#8a4b1e;border-radius:10px;padding:10px 13px;font-size:13.5px;margin:12px 0}
   .flag b{color:#6f3a14}
   table.data{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
@@ -145,10 +151,10 @@
   <!-- Lodging -->
   <h2 class="sec">Lodging</h2>
   <table class="data">
-    <tr><td class="rowlabel">Home</td><td><b>5-bedroom house</b>, Jackson Hole (<a href="https://www.vrbo.com/5346734?dateless=true">VRBO listing</a>)</td></tr>
+    <tr><td class="rowlabel">Home</td><td><b>5-bedroom house</b>, Jackson Hole (<a href="https://www.vrbo.com/5346734?dateless=true" target="_blank" rel="noopener">VRBO listing</a>)</td></tr>
     <tr><td class="rowlabel">Nights</td><td>3 — Thu Jul 23, Fri Jul 24, Sat Jul 25 · check out Sun Jul 26</td></tr>
     <tr><td class="rowlabel">Address</td><td><i>Paste after booking</i> — this becomes your "home" pin on the map.</td></tr>
-    <tr><td class="rowlabel">Groceries</td><td><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Whole+Grocer">Jackson Whole Grocer</a> or <a href="https://www.google.com/maps/search/?api=1&query=Albertsons+Jackson+WY">Albertsons</a> — stock the house on arrival night for breakfasts.</td></tr>
+    <tr><td class="rowlabel">Groceries</td><td><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Whole+Grocer" target="_blank" rel="noopener">Jackson Whole Grocer</a> or <a href="https://www.google.com/maps/search/?api=1&query=Albertsons+Jackson+WY" target="_blank" rel="noopener">Albertsons</a> — stock the house on arrival night for breakfasts.</td></tr>
   </table>
 
   <h2 class="sec">Day by day</h2>
@@ -157,10 +163,10 @@
   <div class="day">
     <div class="day-head h-thu"><span class="dh-day">THU · Jul 23</span><span class="dh-title">Arrive · first drink in town</span></div>
     <table class="tl">
-      <tr class="transit"><td class="time">9:10 PM</td><td class="ic">✈️</td><td class="desc">Land at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport">Jackson Hole Airport (JAC)</a>.</td></tr>
+      <tr class="transit"><td class="time">9:10 PM</td><td class="ic">✈️</td><td class="desc">Land at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a>.</td></tr>
       <tr class="transit"><td class="time">9:30 PM</td><td class="ic">🚗</td><td class="desc">Pick up the rental car at JAC. JAC → town ~20 min.</td></tr>
       <tr class="logistics"><td class="time">10:00 PM</td><td class="ic">🏡</td><td class="desc">Check in, drop bags.</td></tr>
-      <tr class="food"><td class="time">10:30 PM</td><td class="ic">🎪</td><td class="desc">Still plenty on: the <b>Fair carnival runs till midnight</b> — swing by the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY">fairgrounds</a> — or a first-night drink at the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY">Million Dollar Cowboy Bar</a> / <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson">Silver Dollar Bar</a>.</td></tr>
+      <tr class="food"><td class="time">10:30 PM</td><td class="ic">🎪</td><td class="desc">Still plenty on: the <b>Fair carnival runs till midnight</b> — swing by the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">fairgrounds</a> — or a first-night drink at the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> / <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a>.</td></tr>
     </table>
   </div>
 
@@ -168,16 +174,16 @@
   <div class="day">
     <div class="day-head h-fri"><span class="dh-day">FRI · Jul 24</span><span class="dh-title">Grand Teton day · fair or town night</span></div>
     <table class="tl">
-      <tr class="food"><td class="time">9:30 AM</td><td class="ic">☕</td><td class="desc">Coffee + breakfast: <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY">Persephone Bakery</a> or <a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY">Cowboy Coffee</a>. Grab picnic supplies.</td></tr>
-      <tr class="transit"><td class="time">10:15 AM</td><td class="ic">🚗</td><td class="desc">Drive into <a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+National+Park">Grand Teton NP</a>. Buy the park pass ($35/vehicle, 7 days) or an America the Beautiful pass.</td></tr>
-      <tr class="activity"><td class="time">10:45 AM</td><td class="ic">📸</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton">Mormon Row barns</a> (T.A. Moulton barn) — the classic Tetons-behind-a-barn shot.</td></tr>
-      <tr class="activity"><td class="time">11:30 AM</td><td class="ic">🚤</td><td class="desc"><a href="https://jennylakeboating.com/boat-trips/shuttle-service/">Jenny Lake boat shuttle</a> across to <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton">Hidden Falls</a> + Inspiration Point (~2 mi round-trip from the boat dock; push into Cascade Canyon if the group's game).<span class="note">Shuttle runs ~7a–6p, every ~15 min.</span></td></tr>
-      <tr class="food"><td class="time">2:00 PM</td><td class="ic">🍽️</td><td class="desc">Lunch at <a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Chuckwagon+Moose+WY">Dornan's</a> in Moose (deck with full Teton views) — or picnic at String Lake.</td></tr>
-      <tr class="relax"><td class="time">3:30 PM</td><td class="ic">🏊</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=String+Lake+Grand+Teton">String Lake</a> — shallow and (relatively) warm; the best park spot for a swim, float, or paddleboard.</td></tr>
-      <tr class="relax"><td class="time">5:30 PM</td><td class="ic">🏔️</td><td class="desc">Drive up <a href="https://www.nps.gov/thingstodo/signalmountainsummit.htm">Signal Mountain Summit Road</a> for the valley overlook — Jackson Lake and the whole range.</td></tr>
+      <tr class="food"><td class="time">9:30 AM</td><td class="ic">☕</td><td class="desc">Coffee + breakfast: <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone Bakery</a> or <a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY" target="_blank" rel="noopener">Cowboy Coffee</a>. Grab picnic supplies.</td></tr>
+      <tr class="transit"><td class="time">10:15 AM</td><td class="ic">🚗</td><td class="desc">Drive into <a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+National+Park" target="_blank" rel="noopener">Grand Teton NP</a>. Buy the park pass ($35/vehicle, 7 days) or an America the Beautiful pass.</td></tr>
+      <tr class="activity"><td class="time">10:45 AM</td><td class="ic">📸</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton" target="_blank" rel="noopener">Mormon Row barns</a> (T.A. Moulton barn) — the classic Tetons-behind-a-barn shot.</td></tr>
+      <tr class="activity"><td class="time">11:30 AM</td><td class="ic">🚤</td><td class="desc"><a href="https://jennylakeboating.com/boat-trips/shuttle-service/" target="_blank" rel="noopener">Jenny Lake boat shuttle</a> across to <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton" target="_blank" rel="noopener">Hidden Falls</a> + Inspiration Point (~2 mi round-trip from the boat dock; push into Cascade Canyon if the group's game).<span class="note">Shuttle runs ~7a–6p, every ~15 min.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Small fee at the dock (~$20 round-trip), no reservation. First boat ~7 AM — go early to beat the lines. Hidden Falls + Inspiration Point is ~1–2 hrs; add Cascade Canyon for a longer walk. Bring water and a layer.</div></details></td></tr>
+      <tr class="food"><td class="time">2:00 PM</td><td class="ic">🍽️</td><td class="desc">Lunch at <a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Chuckwagon+Moose+WY" target="_blank" rel="noopener">Dornan's</a> in Moose (deck with full Teton views) — or picnic at String Lake.</td></tr>
+      <tr class="relax"><td class="time">3:30 PM</td><td class="ic">🏊</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=String+Lake+Grand+Teton" target="_blank" rel="noopener">String Lake</a> — shallow and (relatively) warm; the best park spot for a swim, float, or paddleboard.</td></tr>
+      <tr class="relax"><td class="time">5:30 PM</td><td class="ic">🏔️</td><td class="desc">Drive up <a href="https://www.nps.gov/thingstodo/signalmountainsummit.htm" target="_blank" rel="noopener">Signal Mountain Summit Road</a> for the valley overlook — Jackson Lake and the whole range.</td></tr>
       <tr class="food"><td class="time">8:00 PM</td><td class="ic">🎪</td><td class="desc"><b>Pick your Friday night:</b>
-        <br>• <b>Fair, final carnival night</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY">Teton County Fairgrounds</a> (walkable downtown): carnival till midnight, beer garden till 11:30, and <b>Banda Retoños live 8 PM–midnight</b>.
-        <br>• Or a <b>group dinner in town</b> + the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY">Cowboy Bar</a> mechanical bull.
+        <br>• <b>Fair, final carnival night</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> (walkable downtown): carnival till midnight, beer garden till 11:30, and <b>Banda Retoños live 8 PM–midnight</b>.
+        <br>• Or a <b>group dinner in town</b> + the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Cowboy Bar</a> mechanical bull.
         <span class="note">No rodeo tonight — that's Saturday. See below.</span></td></tr>
     </table>
   </div>
@@ -186,15 +192,15 @@
   <div class="day">
     <div class="day-head h-sat"><span class="dh-day">SAT · Jul 25</span><span class="dh-title">Easy Jackson play-day · split night out</span></div>
     <table class="tl">
-      <tr class="food"><td class="time">9:00 AM</td><td class="ic">☕</td><td class="desc">Sleep in. Coffee + a real breakfast — <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY">Café Genevieve</a> or <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY">Persephone</a>.</td></tr>
-      <tr class="activity"><td class="time">10:30 AM</td><td class="ic">🚣</td><td class="desc"><b>Snake River scenic float</b> — <a href="https://barkerewing.com/">Barker-Ewing</a> or <a href="https://www.gtlc.com/activities/rafting-the-snake-river">Grand Teton Lodge Co.</a>: a calm 10-mile drift through the park, ~3–4 hrs incl. transport, big wildlife odds (moose, eagles, maybe a bear). Zero effort, all payoff. <b>Book ahead.</b></td></tr>
-      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak — everyone.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free, so ride it for the view.</span></td></tr>
+      <tr class="food"><td class="time">9:00 AM</td><td class="ic">☕</td><td class="desc">Sleep in. Coffee + a real breakfast — <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY" target="_blank" rel="noopener">Café Genevieve</a> or <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone</a>.</td></tr>
+      <tr class="activity"><td class="time">10:30 AM</td><td class="ic">🚣</td><td class="desc"><b>Snake River scenic float</b> — <a href="https://barkerewing.com/" target="_blank" rel="noopener">Barker-Ewing</a> or <a href="https://www.gtlc.com/activities/rafting-the-snake-river" target="_blank" rel="noopener">Grand Teton Lodge Co.</a>: a calm 10-mile drift through the park, ~3–4 hrs incl. transport, big wildlife odds (moose, eagles, maybe a bear). Zero effort, all payoff.<details class="more"><summary>booking &amp; details</summary><div class="body">~$100–120/person, ~3–4 hrs including the shuttle from town. Departures run mid-morning to afternoon — <b>reserve ahead</b> in July. Life vests provided; bring a layer, hat and sunscreen. Trips launch from Moose inside the park.</div></details></td></tr>
+      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak — everyone.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY" target="_blank" rel="noopener">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram" target="_blank" rel="noopener">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free, so ride it for the view.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Reservation required — book a 2-hr session (they start at 9 AM), about $30/adult. Paved access ~20 min south of town, on the Snake River in Hoback Canyon. Bring a towel; swimsuits required.</div></details></td></tr>
       <tr class="logistics"><td class="time">5:30 PM</td><td class="ic">🚿</td><td class="desc">Back to the house, clean up.</td></tr>
       <tr class="split"><td class="time">7:00 PM</td><td class="ic">🔀</td><td class="desc"><div class="two-col">
-        <div class="col rodeo"><div class="col-h">🤠 Rodeo group</div><b>TCF Rodeo</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY">Teton County Fairgrounds</a> (447 Snow King Ave, walkable) — broncs, bulls, barrel racing. Runs ~2 hrs, so about 7–9.</div>
-        <div class="col nonrodeo"><div class="col-h">🍸 Non-rodeo group</div>Early dinner in town — <a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY">Snake River Grill</a>, <a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY">Glorietta</a> or <a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY">Bin22</a> — then head to the fair for the <b>DJ party + carnival at 8</b>. (Or dancing at the <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson">Silver Dollar Bar</a> instead.)</div>
+        <div class="col rodeo"><div class="col-h">🤠 Rodeo group</div><b>TCF Rodeo</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> (447 Snow King Ave, walkable) — broncs, bulls, barrel racing. Runs ~2 hrs, so about 7–9.</div>
+        <div class="col nonrodeo"><div class="col-h">🍸 Non-rodeo group</div>Early dinner in town — <a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a>, <a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> or <a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a> — then head to the fair for the <b>DJ party + carnival at 8</b>. (Or dancing at the <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> instead.)</div>
       </div></td></tr>
-      <tr class="relax"><td class="time">9:00 PM</td><td class="ic">🎉</td><td class="desc"><b>Everyone together</b> at the Fair's <b>DJ party + carnival</b> (till midnight) as the rodeo lets out → kick on to the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY">Cowboy Bar</a> for the mechanical bull.</td></tr>
+      <tr class="relax"><td class="time">9:00 PM</td><td class="ic">🎉</td><td class="desc"><b>Everyone together</b> at the Fair's <b>DJ party + carnival</b> (till midnight) as the rodeo lets out → kick on to the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Cowboy Bar</a> for the mechanical bull.</td></tr>
     </table>
   </div>
 
@@ -203,7 +209,7 @@
     <div class="day-head h-sun"><span class="dh-day">SUN · Jul 26</span><span class="dh-title">Fly home (early — but it's the only direct)</span></div>
     <table class="tl">
       <tr class="logistics"><td class="time">5:15 AM</td><td class="ic">🧳</td><td class="desc">Wake, coffee, load the car — <b>pack Saturday night</b> so this is painless. (7a Mountain ≈ 6a on your SF body clock, which helps a little.)</td></tr>
-      <tr class="transit"><td class="time">5:40 AM</td><td class="ic">🚗</td><td class="desc">Return the rental(s) at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport">JAC</a> — return lot is right at the airport.</td></tr>
+      <tr class="transit"><td class="time">5:40 AM</td><td class="ic">🚗</td><td class="desc">Return the rental(s) at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">JAC</a> — return lot is right at the airport.</td></tr>
       <tr class="logistics"><td class="time">6:05 AM</td><td class="ic">🛄</td><td class="desc">Through security — JAC is tiny, quick.</td></tr>
       <tr class="transit"><td class="time">7:00 AM</td><td class="ic">✈️</td><td class="desc"><b>JAC → home.</b> The only direct flight, so the early alarm's worth it. 🏠</td></tr>
     </table>
@@ -261,11 +267,11 @@
   <h2 class="sec">Classic Jackson Hole — could still add</h2>
   <p class="lead"><span class="fire">🔥</span> = the ones worth squeezing in if there's appetite.</p>
   <ul class="clean">
-    <li><span class="fire">🔥 Whitewater rafting — Snake River Canyon</span> — <a href="https://www.google.com/maps/search/?api=1&query=Dave+Hansen+Whitewater+Jackson">Dave Hansen</a> / <a href="https://www.google.com/maps/search/?api=1&query=Mad+River+Boat+Trips+Jackson">Mad River</a>: class II–III splashy fun ~30 min south. Swap in for the calm float if the group wants a thrill.</li>
+    <li><span class="fire">🔥 Whitewater rafting — Snake River Canyon</span> — <a href="https://www.google.com/maps/search/?api=1&query=Dave+Hansen+Whitewater+Jackson" target="_blank" rel="noopener">Dave Hansen</a> / <a href="https://www.google.com/maps/search/?api=1&query=Mad+River+Boat+Trips+Jackson" target="_blank" rel="noopener">Mad River</a>: class II–III splashy fun ~30 min south. Swap in for the calm float if the group wants a thrill.</li>
     <li><b>Granite Hot Springs</b> — the scenic alternative to the Astoria soak in the plan: prettier canyon setting, but ~1 hr + 10 mi dirt road. Swap in if you'd rather have the views than the convenience.</li>
-    <li><b>Dawn wildlife drive</b> — <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton">Oxbow Bend</a> / <a href="https://www.google.com/maps/search/?api=1&query=Moose-Wilson+Road+Grand+Teton">Moose-Wilson Rd</a> for moose, bison and bears (only if anyone's willing to wake early — optional given the vibe).</li>
-    <li><b>Horseback ride + Western cookout</b> — <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY">Mill Iron Ranch</a>: trail ride + steak dinner. Great group night alternative to the Fair.</li>
-    <li><b>Easy Teton hikes</b> — <a href="https://www.google.com/maps/search/?api=1&query=Taggart+Lake+Trailhead">Taggart Lake</a> or <a href="https://www.google.com/maps/search/?api=1&query=Phelps+Lake+Grand+Teton">Phelps Lake</a>.</li>
+    <li><b>Dawn wildlife drive</b> — <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton" target="_blank" rel="noopener">Oxbow Bend</a> / <a href="https://www.google.com/maps/search/?api=1&query=Moose-Wilson+Road+Grand+Teton" target="_blank" rel="noopener">Moose-Wilson Rd</a> for moose, bison and bears (only if anyone's willing to wake early — optional given the vibe).</li>
+    <li><b>Horseback ride + Western cookout</b> — <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY" target="_blank" rel="noopener">Mill Iron Ranch</a>: trail ride + steak dinner. Great group night alternative to the Fair.</li>
+    <li><b>Easy Teton hikes</b> — <a href="https://www.google.com/maps/search/?api=1&query=Taggart+Lake+Trailhead" target="_blank" rel="noopener">Taggart Lake</a> or <a href="https://www.google.com/maps/search/?api=1&query=Phelps+Lake+Grand+Teton" target="_blank" rel="noopener">Phelps Lake</a>.</li>
     <li><b>Clay / sporting shooting</b> — a classic bachelor add-on; a few outfitters run half-day sessions near town.</li>
     <li><s>Yellowstone</s> — skipped this trip (too far for a day). Noted here so it doesn't get re-litigated. 😉</li>
   </ul>
@@ -273,35 +279,35 @@
   <h2 class="sec">Eats &amp; drinks</h2>
   <div class="extras-cat">☕ Coffee &amp; breakfast</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY">Persephone Bakery</a> — pastries + egg sandwiches; the town go-to.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY">Cowboy Coffee Co.</a> — solid espresso just off the Square.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY">Café Genevieve</a> — brunch in a log cabin; order the "pig candy."</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone Bakery</a> — pastries + egg sandwiches; the town go-to.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY" target="_blank" rel="noopener">Cowboy Coffee Co.</a> — solid espresso just off the Square.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY" target="_blank" rel="noopener">Café Genevieve</a> — brunch in a log cabin; order the "pig candy."</li>
   </ul>
   <div class="extras-cat">🍽️ Group dinners</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY">Snake River Grill</a> — the upscale special-occasion pick.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY">Glorietta</a> / <a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY">Local</a> — Italian and steak, both great for a group.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY">Bin22</a> — wine bar + Spanish tapas.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Merry+Piglets+Jackson+WY">Merry Piglets</a> — margaritas + Tex-Mex, loud and fun.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a> — the upscale special-occasion pick.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> / <a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a> — Italian and steak, both great for a group.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a> — wine bar + Spanish tapas.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Merry+Piglets+Jackson+WY" target="_blank" rel="noopener">Merry Piglets</a> — margaritas + Tex-Mex, loud and fun.</li>
   </ul>
   <div class="extras-cat">🍔 Local &amp; cheap</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY">Hand Fire</a> / <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson">Pinky G's</a> — wood-fired + late-night slices.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Big+Hole+BBQ+Jackson+WY">Big Hole BBQ</a> — brisket and ribs to feed a group.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Pizza+Pasta+Moose+WY">Dornan's</a> — pizza + beer deck in the park (Friday lunch).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY" target="_blank" rel="noopener">Hand Fire</a> / <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson" target="_blank" rel="noopener">Pinky G's</a> — wood-fired + late-night slices.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Big+Hole+BBQ+Jackson+WY" target="_blank" rel="noopener">Big Hole BBQ</a> — brisket and ribs to feed a group.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Pizza+Pasta+Moose+WY" target="_blank" rel="noopener">Dornan's</a> — pizza + beer deck in the park (Friday lunch).</li>
   </ul>
   <div class="extras-cat">🍺 Bars &amp; nightlife</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY">Million Dollar Cowboy Bar</a> — saddle stools + mechanical bull.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson">Silver Dollar Bar</a> — 2,032 silver dollars in the bar top; live music.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Mangy+Moose+Teton+Village">Mangy Moose</a> — legendary après bar in Teton Village (pair with the tram).</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Melvin+Brewing+Jackson+WY">Melvin Brewing / Thai Me Up</a> — award-winning IPAs + Thai food.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> — saddle stools + mechanical bull.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> — 2,032 silver dollars in the bar top; live music.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Mangy+Moose+Teton+Village" target="_blank" rel="noopener">Mangy Moose</a> — legendary après bar in Teton Village (pair with the tram).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Melvin+Brewing+Jackson+WY" target="_blank" rel="noopener">Melvin Brewing / Thai Me Up</a> — award-winning IPAs + Thai food.</li>
   </ul>
   <div class="extras-cat">🌾 Gluten-free friendly</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Drug+Jackson+WY">Jackson Drug</a> — dedicated GF fryer, most of the menu GF; the safest bet.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY">Local</a> · <a href="https://www.google.com/maps/search/?api=1&query=Liberty+Burger+Jackson+WY">Liberty Burger</a> · <a href="https://www.google.com/maps/search/?api=1&query=Thai+Me+Up+Jackson+WY">Thai Me Up</a> — plenty of GF options.</li>
-    <li>GF pizza at <a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY">Hand Fire</a> or <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson">Pinky G's</a>.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Drug+Jackson+WY" target="_blank" rel="noopener">Jackson Drug</a> — dedicated GF fryer, most of the menu GF; the safest bet.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a> · <a href="https://www.google.com/maps/search/?api=1&query=Liberty+Burger+Jackson+WY" target="_blank" rel="noopener">Liberty Burger</a> · <a href="https://www.google.com/maps/search/?api=1&query=Thai+Me+Up+Jackson+WY" target="_blank" rel="noopener">Thai Me Up</a> — plenty of GF options.</li>
+    <li>GF pizza at <a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY" target="_blank" rel="noopener">Hand Fire</a> or <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson" target="_blank" rel="noopener">Pinky G's</a>.</li>
   </ul>
 </section>
 
@@ -330,19 +336,19 @@
   <h2 class="sec">Pinned places</h2>
   <div class="extras-cat">🏡 Base &amp; town</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport">Jackson Hole Airport (JAC)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Town+Square+Jackson+WY">Town Square</a> · <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY">Teton County Fairgrounds (rodeo)</a></li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Town+Square+Jackson+WY" target="_blank" rel="noopener">Town Square</a> · <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds (rodeo)</a></li>
   </ul>
   <div class="extras-cat">🏔️ Grand Teton (Fri)</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton">Mormon Row barns</a> · <a href="https://www.google.com/maps/search/?api=1&query=Jenny+Lake+Boat+Dock">Jenny Lake shuttle dock</a> · <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton">Hidden Falls</a> · <a href="https://www.google.com/maps/search/?api=1&query=String+Lake+Grand+Teton">String Lake</a> · <a href="https://www.google.com/maps/search/?api=1&query=Signal+Mountain+Summit+Grand+Teton">Signal Mountain</a></li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton" target="_blank" rel="noopener">Mormon Row barns</a> · <a href="https://www.google.com/maps/search/?api=1&query=Jenny+Lake+Boat+Dock" target="_blank" rel="noopener">Jenny Lake shuttle dock</a> · <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton" target="_blank" rel="noopener">Hidden Falls</a> · <a href="https://www.google.com/maps/search/?api=1&query=String+Lake+Grand+Teton" target="_blank" rel="noopener">String Lake</a> · <a href="https://www.google.com/maps/search/?api=1&query=Signal+Mountain+Summit+Grand+Teton" target="_blank" rel="noopener">Signal Mountain</a></li>
   </ul>
   <div class="extras-cat">🚣 Saturday play-day</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Barker+Ewing+Float+Trips+Moose+WY">Snake River float launch (Moose)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Aerial+Tram+Teton+Village">Aerial Tram (Teton Village)</a></li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Barker+Ewing+Float+Trips+Moose+WY" target="_blank" rel="noopener">Snake River float launch (Moose)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Aerial+Tram+Teton+Village" target="_blank" rel="noopener">Aerial Tram (Teton Village)</a></li>
   </ul>
   <div class="extras-cat">✨ Could-add</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming">Granite Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton">Oxbow Bend</a> · <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY">Mill Iron Ranch</a></li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton" target="_blank" rel="noopener">Oxbow Bend</a> · <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY" target="_blank" rel="noopener">Mill Iron Ranch</a></li>
   </ul>
 </section>
 
