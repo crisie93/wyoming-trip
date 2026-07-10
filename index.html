@@ -107,6 +107,8 @@
   .daybar{display:block;margin:0 0 12px}
   .daybtn{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;font-size:13.5px;padding:6px 15px;border-radius:999px;cursor:pointer;font-family:inherit;margin:0 6px 6px 0}
   .daybtn.active{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .daybtn[data-day="extras"]{margin-left:10px}
+  .daybtn[data-day="extras"].active{background:#7d5ba6;color:#fff;border-color:#7d5ba6}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -398,7 +400,7 @@
 <!-- ================= MAP ================= -->
 <section class="panel" id="map">
   <h2 class="sec">Map</h2>
-  <p class="lead">Tap a day to trace that day's route (numbered pins follow the itinerary order), or tap <b>✨ Extras</b> to see all the optional activities &amp; photo spots. Tap any pin to open it in Google Maps.</p>
+  <p class="lead">Tap a day to trace its route (numbered pins follow the itinerary order). Toggle <b>✨ Extras</b> to overlay every optional spot on top — handy for seeing which extras fit a day. Tap any pin to open it in Google Maps.</p>
   <div class="daybar">
     <button class="daybtn active" data-day="all">All</button>
     <button class="daybtn" data-day="thu">Thu</button>
@@ -487,7 +489,7 @@
     ['Jackson Lake Lodge',43.8650,-110.5900],
     ['Knotty Pine — Victor',43.6027,-111.1113]
   ];
-  let map, dayLayers={}, extrasLayer;
+  let map, dayLayers={}, extrasLayer, curDay='all', extrasOn=false;
   function mk(name,la,lo,color,num){
     const isID=/Victor|Targhee/.test(name);
     const q=encodeURIComponent(name.split(' — ')[0].split(' / ')[0]+(isID?' Idaho':' Jackson Hole WY'));
@@ -509,20 +511,25 @@
     extrasLayer=L.layerGroup();
     EXTRAS.forEach(function(s){ mk(s[0],s[1],s[2],'#7d5ba6','').addTo(extrasLayer); });
     document.querySelectorAll('.daybtn').forEach(function(b){
-      b.addEventListener('click',function(){ showDay(b.dataset.day); });
+      b.addEventListener('click',function(){
+        if(b.dataset.day==='extras'){ extrasOn=!extrasOn; renderMap(false); }
+        else { curDay=b.dataset.day; renderMap(true); }
+      });
     });
-    showDay('all');
+    renderMap(true);
   }
-  function showDay(day){
+  function renderMap(fit){
     const pts=[];
     Object.keys(DAYS).forEach(function(k){
-      if(day==='all'||day===k){ dayLayers[k].addTo(map); DAYS[k].stops.forEach(function(s){pts.push([s[1],s[2]]);}); }
+      if(curDay==='all'||curDay===k){ dayLayers[k].addTo(map); DAYS[k].stops.forEach(function(s){pts.push([s[1],s[2]]);}); }
       else { map.removeLayer(dayLayers[k]); }
     });
-    if(day==='extras'){ extrasLayer.addTo(map); EXTRAS.forEach(function(s){pts.push([s[1],s[2]]);}); }
-    else if(extrasLayer){ map.removeLayer(extrasLayer); }
-    if(pts.length) map.fitBounds(pts,{padding:[30,30]});
-    document.querySelectorAll('.daybtn').forEach(function(b){ b.classList.toggle('active', b.dataset.day===day); });
+    if(extrasOn){ extrasLayer.addTo(map); } else { map.removeLayer(extrasLayer); }
+    document.querySelectorAll('.daybtn').forEach(function(b){
+      if(b.dataset.day==='extras'){ b.classList.toggle('active', extrasOn); }
+      else { b.classList.toggle('active', b.dataset.day===curDay); }
+    });
+    if(fit && pts.length) map.fitBounds(pts,{padding:[30,30]});
   }
   // ---- Booking checklist (shared via Supabase) ----
   const SB_URL='https://ajdqascwkbgvcaqrbcaw.supabase.co';
