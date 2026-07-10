@@ -398,13 +398,14 @@
 <!-- ================= MAP ================= -->
 <section class="panel" id="map">
   <h2 class="sec">Map</h2>
-  <p class="lead">Tap a day to trace that day's route. Numbered pins follow the itinerary order; tap any pin to open it in Google Maps.</p>
+  <p class="lead">Tap a day to trace that day's route (numbered pins follow the itinerary order), or tap <b>✨ Extras</b> to see all the optional activities &amp; photo spots. Tap any pin to open it in Google Maps.</p>
   <div class="daybar">
     <button class="daybtn active" data-day="all">All</button>
     <button class="daybtn" data-day="thu">Thu</button>
     <button class="daybtn" data-day="fri">Fri</button>
     <button class="daybtn" data-day="sat">Sat</button>
     <button class="daybtn" data-day="sun">Sun</button>
+    <button class="daybtn" data-day="extras">✨ Extras</button>
   </div>
   <div id="tripmap"></div>
   <div class="legend" style="margin-top:12px">
@@ -412,7 +413,7 @@
     <span><i class="dot" style="background:#3f7d5a"></i>Fri · Grand Teton</span>
     <span><i class="dot" style="background:#c47a2c"></i>Sat · float &amp; night out</span>
     <span><i class="dot" style="background:#5a8aa0"></i>Sun · fly home</span>
-    <span><i class="dot" style="background:#6b6257"></i>Optional</span>
+    <span><i class="dot" style="background:#7d5ba6"></i>Extras / options</span>
   </div>
 
   <h2 class="sec">Pinned places</h2>
@@ -468,12 +469,25 @@
       ['Victor, ID (home base)',43.5760,-111.0990],
       ['Jackson Hole Airport (JAC)',43.6035,-110.7377]]}
   };
-  const OPTIONAL=[
-    ['Aerial Tram, Teton Village',43.5875,-110.8276],
+  const EXTRAS=[
+    ['Cowboy Coaster — Snow King',43.4636,-110.7566],
+    ['Aerial Tram / Via Ferrata — Teton Village',43.5875,-110.8276],
+    ['Grand Targhee Resort',43.7897,-110.9583],
     ['Granite Hot Springs',43.4041,-110.4462],
-    ['Grand Targhee Resort',43.7897,-110.9583]
+    ['Snake River Canyon — whitewater',43.2440,-110.9200],
+    ['Linn Canyon Ranch — horseback (Victor)',43.5520,-111.0500],
+    ['Taggart Lake — hike',43.6928,-110.7320],
+    ['Phelps Lake — hike',43.5560,-110.7850],
+    ['Cascade Canyon — hike (Jenny Lake)',43.7580,-110.7770],
+    ['Jackson Hole Hat Company — hats',43.4799,-110.7626],
+    ['National Elk Refuge',43.5100,-110.7300],
+    ['Schwabacher Landing — photo',43.8306,-110.6720],
+    ['Snake River Overlook — photo',43.8460,-110.5980],
+    ['Oxbow Bend — wildlife/photo',43.8664,-110.5497],
+    ['Jackson Lake Lodge',43.8650,-110.5900],
+    ['Knotty Pine — Victor',43.6027,-111.1113]
   ];
-  let map, dayLayers={}, optLayer;
+  let map, dayLayers={}, extrasLayer;
   function mk(name,la,lo,color,num){
     const isID=/Victor|Targhee/.test(name);
     const q=encodeURIComponent(name.split(' — ')[0].split(' / ')[0]+(isID?' Idaho':' Jackson Hole WY'));
@@ -492,8 +506,8 @@
       d.stops.forEach(function(s,i){ mk(s[0],s[1],s[2],d.color,i+1).addTo(lg); });
       dayLayers[k]=lg;
     });
-    optLayer=L.layerGroup();
-    OPTIONAL.forEach(function(s){ mk(s[0]+' (optional)',s[1],s[2],'#6b6257','').addTo(optLayer); });
+    extrasLayer=L.layerGroup();
+    EXTRAS.forEach(function(s){ mk(s[0],s[1],s[2],'#7d5ba6','').addTo(extrasLayer); });
     document.querySelectorAll('.daybtn').forEach(function(b){
       b.addEventListener('click',function(){ showDay(b.dataset.day); });
     });
@@ -505,8 +519,8 @@
       if(day==='all'||day===k){ dayLayers[k].addTo(map); DAYS[k].stops.forEach(function(s){pts.push([s[1],s[2]]);}); }
       else { map.removeLayer(dayLayers[k]); }
     });
-    if(day==='all'){ optLayer.addTo(map); OPTIONAL.forEach(function(s){pts.push([s[1],s[2]]);}); }
-    else if(optLayer){ map.removeLayer(optLayer); }
+    if(day==='extras'){ extrasLayer.addTo(map); EXTRAS.forEach(function(s){pts.push([s[1],s[2]]);}); }
+    else if(extrasLayer){ map.removeLayer(extrasLayer); }
     if(pts.length) map.fitBounds(pts,{padding:[30,30]});
     document.querySelectorAll('.daybtn').forEach(function(b){ b.classList.toggle('active', b.dataset.day===day); });
   }
