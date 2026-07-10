@@ -91,14 +91,22 @@
   ul.clean{list-style:none;padding:0;margin:0}
   ul.clean li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 9px;font-size:14px}
   ul.clean li b{color:var(--ink)}
+  ul.todo{list-style:none;padding:0;margin:0 0 6px}
+  ul.todo li{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 9px;font-size:14px}
+  ul.todo label{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+  ul.todo input{margin-top:2px;width:17px;height:17px;flex:0 0 auto;accent-color:var(--pine)}
+  ul.todo li.done{background:#eef4ef;border-color:#cfe0d4}
+  em.by{display:block;color:var(--pine);font-style:normal;font-size:12px;font-weight:700;margin-top:3px}
+  .namebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 4px 14px;font-size:14px;color:var(--muted)}
+  .namebar select{font:inherit;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-weight:600}
+  .synced-note{font-size:12.5px}
   .mapframe{width:100%;height:420px;border:1px solid var(--line);border-radius:16px}
   footer{text-align:center;color:var(--muted);font-size:12.5px;margin:34px 0 0}
-  #map{width:100%;height:440px;border:1px solid var(--line);border-radius:16px}
+  #tripmap{width:100%;height:440px;border:1px solid var(--line);border-radius:16px}
   .leaflet-popup-content{font-family:inherit;font-size:13.5px}
-  .mapbox{display:flex;flex-direction:column;gap:12px}
-  .mapdays{display:flex;gap:6px;flex-wrap:wrap}
-  .mapday{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;font-size:13.5px;padding:6px 15px;border-radius:999px;cursor:pointer;font-family:inherit}
-  .mapday.active{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .daybar{display:block;margin:0 0 12px}
+  .daybtn{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;font-size:13.5px;padding:6px 15px;border-radius:999px;cursor:pointer;font-family:inherit;margin:0 6px 6px 0}
+  .daybtn.active{background:var(--pine);color:#fff;border-color:var(--pine)}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -114,6 +122,7 @@
 <nav class="tabs">
   <div class="inner">
     <button class="tab active" data-p="itinerary">📆 Itinerary</button>
+    <button class="tab" data-p="book">✅ Book</button>
     <button class="tab" data-p="costs">💸 Costs</button>
     <button class="tab" data-p="extras">✨ Extras</button>
     <button class="tab" data-p="map">🗺️ Map</button>
@@ -151,10 +160,10 @@
   <!-- Lodging -->
   <h2 class="sec">Lodging</h2>
   <table class="data">
-    <tr><td class="rowlabel">Home</td><td><b>5-bedroom house</b>, Jackson Hole (<a href="https://www.vrbo.com/5346734?dateless=true" target="_blank" rel="noopener">VRBO listing</a>)</td></tr>
+    <tr><td class="rowlabel">Home</td><td><b>5-bedroom house</b>, Victor, ID — Teton Valley, over Teton Pass from Jackson (<a href="https://www.vrbo.com/5346734?dateless=true" target="_blank" rel="noopener">VRBO listing</a>)</td></tr>
     <tr><td class="rowlabel">Nights</td><td>3 — Thu Jul 23, Fri Jul 24, Sat Jul 25 · check out Sun Jul 26</td></tr>
-    <tr><td class="rowlabel">Address</td><td><i>Paste after booking</i> — this becomes your "home" pin on the map.</td></tr>
-    <tr><td class="rowlabel">Groceries</td><td><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Whole+Grocer" target="_blank" rel="noopener">Jackson Whole Grocer</a> or <a href="https://www.google.com/maps/search/?api=1&query=Albertsons+Jackson+WY" target="_blank" rel="noopener">Albertsons</a> — stock the house on arrival night for breakfasts.</td></tr>
+    <tr><td class="rowlabel">Address</td><td><a href="https://www.google.com/maps/search/?api=1&query=346+Royal+Elk+Cir+Victor+ID+83455" target="_blank" rel="noopener">346 Royal Elk Cir, Victor, ID 83455</a> — in the Teton Springs resort area.</td></tr>
+    <tr><td class="rowlabel">Groceries</td><td><a href="https://www.google.com/maps/search/?api=1&query=Broulim%27s+Victor+ID" target="_blank" rel="noopener">Broulim's</a> or <a href="https://www.google.com/maps/search/?api=1&query=Victor+Valley+Market+Victor+ID" target="_blank" rel="noopener">Victor Valley Market</a>, both in Victor — stock up on arrival + before park days.</td></tr>
   </table>
 
   <h2 class="sec">Day by day</h2>
@@ -164,9 +173,9 @@
     <div class="day-head h-thu"><span class="dh-day">THU · Jul 23</span><span class="dh-title">Arrive · first drink in town</span></div>
     <table class="tl">
       <tr class="transit"><td class="time">9:10 PM</td><td class="ic">✈️</td><td class="desc">Land at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a>.</td></tr>
-      <tr class="transit"><td class="time">9:30 PM</td><td class="ic">🚗</td><td class="desc">Pick up the rental car at JAC. JAC → town ~20 min.</td></tr>
-      <tr class="logistics"><td class="time">10:00 PM</td><td class="ic">🏡</td><td class="desc">Check in, drop bags.</td></tr>
-      <tr class="food"><td class="time">10:30 PM</td><td class="ic">🎪</td><td class="desc">Still plenty on: the <b>Fair carnival runs till midnight</b> — swing by the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">fairgrounds</a> — or a first-night drink at the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> / <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a>.</td></tr>
+      <tr class="transit"><td class="time">9:30 PM</td><td class="ic">🚗</td><td class="desc">Pick up the rental car at JAC, then drive over <b>Teton Pass</b> to the house in Victor — ~40 min, dark and winding at night, so take it easy.</td></tr>
+      <tr class="logistics"><td class="time">10:15 PM</td><td class="ic">🏡</td><td class="desc">Check in, drop bags.</td></tr>
+      <tr class="food"><td class="time">10:30 PM</td><td class="ic">🍺</td><td class="desc">Settle in, or grab a nightcap in Victor — <a href="https://www.google.com/maps/search/?api=1&query=Knotty+Pine+Supper+Club+Victor+ID" target="_blank" rel="noopener">Knotty Pine</a> or <a href="https://www.google.com/maps/search/?api=1&query=Brakeman+American+Grill+Victor+ID" target="_blank" rel="noopener">Brakeman</a>. (Jackson's bars are 40 min back over the pass — save those for nights you're already over there.)</td></tr>
     </table>
   </div>
 
@@ -174,33 +183,35 @@
   <div class="day">
     <div class="day-head h-fri"><span class="dh-day">FRI · Jul 24</span><span class="dh-title">Grand Teton day · fair or town night</span></div>
     <table class="tl">
-      <tr class="food"><td class="time">9:30 AM</td><td class="ic">☕</td><td class="desc">Coffee + breakfast: <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone Bakery</a> or <a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY" target="_blank" rel="noopener">Cowboy Coffee</a>. Grab picnic supplies.</td></tr>
-      <tr class="transit"><td class="time">10:15 AM</td><td class="ic">🚗</td><td class="desc">Drive into <a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+National+Park" target="_blank" rel="noopener">Grand Teton NP</a>. Buy the park pass ($35/vehicle, 7 days) or an America the Beautiful pass.</td></tr>
+      <tr class="food"><td class="time">9:30 AM</td><td class="ic">☕</td><td class="desc">Coffee + breakfast in Victor — <a href="https://www.google.com/maps/search/?api=1&query=Butter+Cafe+Victor+ID" target="_blank" rel="noopener">Butter Café</a> or <a href="https://www.google.com/maps/search/?api=1&query=Rise+Coffee+House+Victor+ID" target="_blank" rel="noopener">Rise Coffee House</a> — both do a great matcha. Grab picnic supplies at <a href="https://www.google.com/maps/search/?api=1&query=Broulim%27s+Victor+ID" target="_blank" rel="noopener">Broulim's</a> before you cross.<span class="note">🎒 Pack today: swimsuit for String Lake, layers + rain shell, water, sunscreen, closed shoes.</span></td></tr>
+      <tr class="transit"><td class="time">10:15 AM</td><td class="ic">🚗</td><td class="desc">Drive over <b>Teton Pass</b> into <a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+National+Park" target="_blank" rel="noopener">Grand Teton NP</a> — ~1 hr from Victor. Buy the park pass ($35/vehicle, 7 days) or an America the Beautiful pass.</td></tr>
       <tr class="activity"><td class="time">10:45 AM</td><td class="ic">📸</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton" target="_blank" rel="noopener">Mormon Row barns</a> (T.A. Moulton barn) — the classic Tetons-behind-a-barn shot.</td></tr>
-      <tr class="activity"><td class="time">11:30 AM</td><td class="ic">🚤</td><td class="desc"><a href="https://jennylakeboating.com/boat-trips/shuttle-service/" target="_blank" rel="noopener">Jenny Lake boat shuttle</a> across to <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton" target="_blank" rel="noopener">Hidden Falls</a> + Inspiration Point (~2 mi round-trip from the boat dock; push into Cascade Canyon if the group's game).<span class="note">Shuttle runs ~7a–6p, every ~15 min.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Small fee at the dock (~$20 round-trip), no reservation. First boat ~7 AM — go early to beat the lines. Hidden Falls + Inspiration Point is ~1–2 hrs; add Cascade Canyon for a longer walk. Bring water and a layer.</div></details></td></tr>
+      <tr class="activity"><td class="time">11:30 AM</td><td class="ic">🚤</td><td class="desc"><a href="https://jennylakeboating.com/boat-trips/shuttle-service/" target="_blank" rel="noopener">Jenny Lake boat shuttle</a> across to <a href="https://www.google.com/maps/search/?api=1&query=Hidden+Falls+Grand+Teton" target="_blank" rel="noopener">Hidden Falls</a> + Inspiration Point (~2 mi round-trip from the boat dock; push into Cascade Canyon if the group's game).<span class="note">Shuttle runs ~7a–6p, every ~15 min.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Walk-up, no reservation — a small fee at the dock (~$20 round-trip). Boats run every ~15 min, ~7 AM–6 PM; at midday there can be a short line, so allow a few extra minutes. Hidden Falls + Inspiration Point is ~1–2 hrs; add Cascade Canyon for a longer walk. Bring water and a layer.</div></details></td></tr>
       <tr class="food"><td class="time">2:00 PM</td><td class="ic">🍽️</td><td class="desc">Lunch at <a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Chuckwagon+Moose+WY" target="_blank" rel="noopener">Dornan's</a> in Moose (deck with full Teton views) — or picnic at String Lake.</td></tr>
       <tr class="relax"><td class="time">3:30 PM</td><td class="ic">🏊</td><td class="desc"><a href="https://www.google.com/maps/search/?api=1&query=String+Lake+Grand+Teton" target="_blank" rel="noopener">String Lake</a> — shallow and (relatively) warm; the best park spot for a swim, float, or paddleboard.</td></tr>
-      <tr class="relax"><td class="time">5:30 PM</td><td class="ic">🏔️</td><td class="desc">Drive up <a href="https://www.nps.gov/thingstodo/signalmountainsummit.htm" target="_blank" rel="noopener">Signal Mountain Summit Road</a> for the valley overlook — Jackson Lake and the whole range.</td></tr>
+      <tr class="relax"><td class="time">5:30 PM</td><td class="ic">🏔️</td><td class="desc"><b>Optional</b> — drive up <a href="https://www.nps.gov/thingstodo/signalmountainsummit.htm" target="_blank" rel="noopener">Signal Mountain Summit Road</a> for the valley overlook (Jackson Lake + the whole range), or drinks / a milkshake with Teton views at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Lake+Lodge" target="_blank" rel="noopener">Jackson Lake Lodge</a>. Or skip it and head back to Victor to shower and change before the night out — bring your going-out clothes if you'd rather change in town and save the extra pass trip.</td></tr>
+      <tr class="transit"><td class="time">6:30 PM</td><td class="ic">🚗</td><td class="desc">Head back toward Jackson town (~45 min from the north end of the park).</td></tr>
+      <tr class="activity"><td class="time">7:15 PM</td><td class="ic">🤠</td><td class="desc"><b>Gear up + Cowboy Coaster.</b> Grab cowboy hats at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Hat+Company" target="_blank" rel="noopener">Jackson Hole Hat Company</a> on the Square, then ride the <a href="https://www.google.com/maps/search/?api=1&query=Snow+King+Mountain+Cowboy+Coaster+Jackson" target="_blank" rel="noopener">Cowboy Coaster</a> at Snow King — a 10-min alpine coaster right in town, open till ~9 PM.</td></tr>
       <tr class="food"><td class="time">8:00 PM</td><td class="ic">🎪</td><td class="desc"><b>Pick your Friday night:</b>
         <br>• <b>Fair, final carnival night</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> (walkable downtown): carnival till midnight, beer garden till 11:30, and <b>Banda Retoños live 8 PM–midnight</b>.
-        <br>• Or a <b>group dinner in town</b> + the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Cowboy Bar</a> mechanical bull.
-        <span class="note">No rodeo tonight — that's Saturday. See below.</span></td></tr>
+        <br>• Or a <b>group dinner in town</b> + the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Cowboy Bar</a>.
+        <span class="note">The fairgrounds and the Cowboy Bar are ~½ mile apart (a 10-min walk) — do both, or decide once you're there.</span></td></tr>
+      <tr class="transit"><td class="time">11:30 PM</td><td class="ic">🚗</td><td class="desc">Drive back over <b>Teton Pass</b> to Victor — ~40 min, dark and winding. Sober driver, and glance at the road status before heading up.</td></tr>
     </table>
   </div>
 
   <!-- SAT -->
   <div class="day">
-    <div class="day-head h-sat"><span class="dh-day">SAT · Jul 25</span><span class="dh-title">Easy Jackson play-day · split night out</span></div>
+    <div class="day-head h-sat"><span class="dh-day">SAT · Jul 25</span><span class="dh-title">Easy Jackson play-day · night out</span></div>
     <table class="tl">
-      <tr class="food"><td class="time">9:00 AM</td><td class="ic">☕</td><td class="desc">Sleep in. Coffee + a real breakfast — <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY" target="_blank" rel="noopener">Café Genevieve</a> or <a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone</a>.</td></tr>
-      <tr class="activity"><td class="time">10:30 AM</td><td class="ic">🚣</td><td class="desc"><b>Snake River scenic float</b> — <a href="https://barkerewing.com/" target="_blank" rel="noopener">Barker-Ewing</a> or <a href="https://www.gtlc.com/activities/rafting-the-snake-river" target="_blank" rel="noopener">Grand Teton Lodge Co.</a>: a calm 10-mile drift through the park, ~3–4 hrs incl. transport, big wildlife odds (moose, eagles, maybe a bear). Zero effort, all payoff.<details class="more"><summary>booking &amp; details</summary><div class="body">~$100–120/person, ~3–4 hrs including the shuttle from town. Departures run mid-morning to afternoon — <b>reserve ahead</b> in July. Life vests provided; bring a layer, hat and sunscreen. Trips launch from Moose inside the park.</div></details></td></tr>
-      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak — everyone.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY" target="_blank" rel="noopener">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram" target="_blank" rel="noopener">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free, so ride it for the view.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Reservation required — book a 2-hr session (they start at 9 AM), about $30/adult. Paved access ~20 min south of town, on the Snake River in Hoback Canyon. Bring a towel; swimsuits required.</div></details></td></tr>
+      <tr class="food"><td class="time">9:00 AM</td><td class="ic">☕</td><td class="desc">Sleep in. Coffee + a real breakfast in Victor — <a href="https://www.google.com/maps/search/?api=1&query=Butter+Cafe+Victor+ID" target="_blank" rel="noopener">Butter Café</a> or <a href="https://www.google.com/maps/search/?api=1&query=Provisions+Local+Kitchen+Victor+ID" target="_blank" rel="noopener">Provisions</a> (Butter does a great matcha). (The float launches from Moose, ~1 hr over the pass — aim to leave by ~9:30.)<span class="note">🎒 Pack today: swimsuit + towel for the float and hot springs, plus a dry change of clothes for dinner after the soak.</span></td></tr>
+      <tr class="activity"><td class="time">10:30 AM</td><td class="ic">🚣</td><td class="desc"><b>Snake River scenic float</b> — <a href="https://barkerewing.com/" target="_blank" rel="noopener">Barker-Ewing</a> or <a href="https://www.gtlc.com/activities/rafting-the-snake-river" target="_blank" rel="noopener">Grand Teton Lodge Co.</a>: a calm 10-mile drift through the park, ~3–4 hrs incl. transport, big wildlife odds (moose, eagles, maybe a bear). Zero effort, all payoff.<details class="more"><summary>booking &amp; details</summary><div class="body">~$100–120/person, ~3–4 hrs including the shuttle from town. Departures run mid-morning to afternoon — <b><a href="https://barkerewing.com/" target="_blank" rel="noopener">reserve ahead at Barker-Ewing →</a></b> in July. Life vests provided; bring a layer, hat and sunscreen. Trips launch from Moose inside the park.</div></details></td></tr>
+      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY" target="_blank" rel="noopener">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram" target="_blank" rel="noopener">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free, so ride it for the view.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Reservation required — <a href="https://astoriahotspringspark.org/" target="_blank" rel="noopener">book a 2-hr session →</a> (they start at 9 AM), about $30/adult. Paved access ~20 min south of town, on the Snake River in Hoback Canyon. Bring a towel; swimsuits required.</div></details></td></tr>
       <tr class="logistics"><td class="time">5:30 PM</td><td class="ic">🚿</td><td class="desc">Back to the house, clean up.</td></tr>
-      <tr class="split"><td class="time">7:00 PM</td><td class="ic">🔀</td><td class="desc"><div class="two-col">
-        <div class="col rodeo"><div class="col-h">🤠 Rodeo group</div><b>TCF Rodeo</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> (447 Snow King Ave, walkable) — broncs, bulls, barrel racing. Runs ~2 hrs, so about 7–9.</div>
-        <div class="col nonrodeo"><div class="col-h">🍸 Non-rodeo group</div>Early dinner in town — <a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a>, <a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> or <a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a> — then head to the fair for the <b>DJ party + carnival at 8</b>. (Or dancing at the <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> instead.)</div>
-      </div></td></tr>
-      <tr class="relax"><td class="time">9:00 PM</td><td class="ic">🎉</td><td class="desc"><b>Everyone together</b> at the Fair's <b>DJ party + carnival</b> (till midnight) as the rodeo lets out → kick on to the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Cowboy Bar</a> for the mechanical bull.</td></tr>
+      <tr class="food"><td class="time">6:30 PM</td><td class="ic">🍽️</td><td class="desc">Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> (Italian, on the Square) — or <a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a> / <a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a>. <a href="https://www.google.com/search?q=Glorietta+Jackson+Hole+reservations" target="_blank" rel="noopener">Reserve ahead →</a></td></tr>
+      <tr class="activity"><td class="time">8:00 PM</td><td class="ic">🎧</td><td class="desc"><b>DJ party + carnival</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> — the Fair's late-night DJ set runs 8 PM–midnight.</td></tr>
+      <tr class="relax"><td class="time">9:30 PM</td><td class="ic">🤠</td><td class="desc"><b>Line dancing + the mechanical bull</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> — live country band and the saddle bar-stools.</td></tr>
+      <tr class="transit"><td class="time">12:00 AM</td><td class="ic">🚗</td><td class="desc">Drive back over <b>Teton Pass</b> to Victor — ~40 min. Line up a <b>sober driver</b>; the pass is dark and winding this late.</td></tr>
     </table>
   </div>
 
@@ -208,21 +219,20 @@
   <div class="day">
     <div class="day-head h-sun"><span class="dh-day">SUN · Jul 26</span><span class="dh-title">Fly home (early — but it's the only direct)</span></div>
     <table class="tl">
-      <tr class="logistics"><td class="time">5:15 AM</td><td class="ic">🧳</td><td class="desc">Wake, coffee, load the car — <b>pack Saturday night</b> so this is painless. (7a Mountain ≈ 6a on your SF body clock, which helps a little.)</td></tr>
-      <tr class="transit"><td class="time">5:40 AM</td><td class="ic">🚗</td><td class="desc">Return the rental(s) at <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">JAC</a> — return lot is right at the airport.</td></tr>
-      <tr class="logistics"><td class="time">6:05 AM</td><td class="ic">🛄</td><td class="desc">Through security — JAC is tiny, quick.</td></tr>
-      <tr class="transit"><td class="time">7:00 AM</td><td class="ic">✈️</td><td class="desc"><b>JAC → home.</b> The only direct flight, so the early alarm's worth it. 🏠</td></tr>
+      <tr class="logistics"><td class="time">4:50 AM</td><td class="ic">🧳</td><td class="desc">Wake, coffee, load the car — <b>pack Saturday night</b> so this is painless. (7a Mountain ≈ 6a on your SF body clock, which helps a little.)</td></tr>
+      <tr class="transit"><td class="time">5:15 AM</td><td class="ic">🚗</td><td class="desc">Drive over <b>Teton Pass</b> to <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">JAC</a> — ~45 min, dark; allow extra and check the road status the night before.</td></tr>
+      <tr class="logistics"><td class="time">6:10 AM</td><td class="ic">🛄</td><td class="desc">Return the rental + through security — JAC is tiny, quick.</td></tr>
+      <tr class="transit"><td class="time">7:00 AM</td><td class="ic">✈️</td><td class="desc"><b>JAC → SF.</b> The only direct flight, so the early alarm's worth it. 🏠</td></tr>
     </table>
   </div>
 
   <!-- Quick logistics -->
   <h2 class="sec">Quick logistics</h2>
   <table class="data">
-    <tr><td class="rowlabel">Time zone</td><td>Jackson is <b>Mountain Time — 1 hr ahead of SF</b>. Works in your favor for the early Sunday flight.</td></tr>
-    <tr><td class="rowlabel">Rental car</td><td>Essential — no rideshare at scale here. Reserve now; July sells out.</td></tr>
+    <tr><td class="rowlabel">Time zone</td><td>Victor and Jackson are both <b>Mountain Time — 1 hr ahead of SF</b>. No change crossing the pass; helps for the early Sunday flight.</td></tr>
+    <tr><td class="rowlabel">Teton Pass</td><td><b>Your base is ~35–45 min over Teton Pass (WY-22, 8,431 ft) from Jackson &amp; the airport.</b> Rebuilt after the 2024 slide and open, but expect summer construction / reduced speed — check <a href="https://www.wyoroad.info/pls/Browse/WRR.RoutesResults?SelectedRoute=WY22" target="_blank" rel="noopener">WYDOT road status</a> before airport runs and late-night drives.</td></tr>
+    <tr><td class="rowlabel">Rental car</td><td>Essential — you'll cross the pass daily; no rideshare at scale here. Reserve now; July sells out.</td></tr>
     <tr><td class="rowlabel">Park entry</td><td>Grand Teton is $35/vehicle (7-day), or an <b>America the Beautiful pass ($80/vehicle)</b>. (No Yellowstone this trip.)</td></tr>
-    <tr><td class="rowlabel">Sat night</td><td>Two tracks: <b>rodeo group</b> (rodeo 7 PM at the fairgrounds → Fair DJ party) and <b>non-rodeo group</b> (town dinner → Silver Dollar dancing), reconverge at the Cowboy Bar ~10 PM. Carnival + live music run most Fair nights (Jul 18–26).</td></tr>
-    <tr><td class="rowlabel">Book ahead</td><td>Snake River float (Sat), any group dinner, rodeo tickets. Aerial tram waffles are walk-up.</td></tr>
     <tr><td class="rowlabel">Bear spray</td><td>Carry it in the park — buy or rent in town (can't fly with it). 100 yd from bears, 25 yd from bison/elk.</td></tr>
     <tr><td class="rowlabel">Altitude</td><td>Jackson sits at ~6,200 ft. Hydrate; ease into day one.</td></tr>
   </table>
@@ -242,10 +252,10 @@
       <tr><td>🚣 Snake River scenic float</td><td class="num">$110</td><td>Barker-Ewing / GTLC, Sat AM</td></tr>
       <tr><td>♨️ Hot springs (Astoria)</td><td class="num">$30</td><td>2-hr session, Sat afternoon</td></tr>
       <tr><td>Food &amp; drinks (3.5 days)</td><td class="num">$260</td><td>groceries + a few dinners out</td></tr>
-      <tr><td>Rodeo ticket</td><td class="num">$30</td><td>rodeo group only, Sat</td></tr>
+      <tr><td>Fair admission (DJ party)</td><td class="num">$15</td><td>Sat night</td></tr>
       <tr><td>Bar night + mechanical bull</td><td class="num">$45</td><td>Cowboy Bar</td></tr>
       <tr><td>Bear-spray rental / sundries</td><td class="num">$25</td><td>per person share</td></tr>
-      <tr class="total"><td>Per person</td><td class="num">≈ $1,774</td><td>the plan as set</td></tr>
+      <tr class="total"><td>Per person</td><td class="num">≈ $1,759</td><td>the plan as set</td></tr>
     </tbody>
   </table>
 
@@ -267,41 +277,77 @@
   <h2 class="sec">Classic Jackson Hole — could still add</h2>
   <p class="lead"><span class="fire">🔥</span> = the ones worth squeezing in if there's appetite.</p>
   <ul class="clean">
+    <li><b>Grand Targhee Resort</b> — the Idaho-side ski hill, ~40 min from Victor with <b>no pass</b>: scenic lift rides, wildflowers, easy hikes with huge Teton views. A mellow alternative to the Jackson tram.</li>
     <li><span class="fire">🔥 Whitewater rafting — Snake River Canyon</span> — <a href="https://www.google.com/maps/search/?api=1&query=Dave+Hansen+Whitewater+Jackson" target="_blank" rel="noopener">Dave Hansen</a> / <a href="https://www.google.com/maps/search/?api=1&query=Mad+River+Boat+Trips+Jackson" target="_blank" rel="noopener">Mad River</a>: class II–III splashy fun ~30 min south. Swap in for the calm float if the group wants a thrill.</li>
     <li><b>Granite Hot Springs</b> — the scenic alternative to the Astoria soak in the plan: prettier canyon setting, but ~1 hr + 10 mi dirt road. Swap in if you'd rather have the views than the convenience.</li>
     <li><b>Dawn wildlife drive</b> — <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton" target="_blank" rel="noopener">Oxbow Bend</a> / <a href="https://www.google.com/maps/search/?api=1&query=Moose-Wilson+Road+Grand+Teton" target="_blank" rel="noopener">Moose-Wilson Rd</a> for moose, bison and bears (only if anyone's willing to wake early — optional given the vibe).</li>
-    <li><b>Horseback ride + Western cookout</b> — <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY" target="_blank" rel="noopener">Mill Iron Ranch</a>: trail ride + steak dinner. Great group night alternative to the Fair.</li>
+    <li><b>Horseback ride + Western cookout</b> — <a href="https://www.google.com/maps/search/?api=1&query=Linn+Canyon+Ranch+Victor+ID" target="_blank" rel="noopener">Linn Canyon Ranch</a> (Victor, no pass) or <a href="https://www.google.com/maps/search/?api=1&query=Mill+Iron+Ranch+Jackson+WY" target="_blank" rel="noopener">Mill Iron Ranch</a>: a gentle trail ride + steak dinner. Wholesome and very Western.</li>
+    <li><b>Dawn wildlife safari</b> — a guided sunrise tour (<a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+EcoTour+Adventures" target="_blank" rel="noopener">EcoTour Adventures</a>) to spot moose, bison, elk and maybe bears/wolves in the wild — respectful, from a distance, with spotting scopes.</li>
+    <li><b>Walk Jackson Town Square</b> — the four elk-antler arches (the classic photo), plus galleries, shops and ice cream; easy to fold into a Jackson evening.</li>
+    <li><b>Cowboy Coaster at Snow King</b> — an alpine mountain coaster right in Jackson town (~10-min ride, open till ~9 PM mid-summer). Quick thrill, walkable from the Square.</li>
+    <li><b>Via Ferrata at Teton Village</b> — guided cabled cliff-climbing on Rendezvous Mountain (half or full day, age 12+); big adrenaline with tram views, new Corbet's Couloir routes in 2026.</li>
+    <li><b>Cascade Canyon hike</b> — carry on past Hidden Falls / Inspiration Point into the canyon: waterfalls, wildflowers, near-guaranteed moose; turn back whenever.</li>
+    <li><b>Gear up — cowboy hats</b> — <a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Hat+Company" target="_blank" rel="noopener">Jackson Hole Hat Company</a> on the Square (off-the-rack from ~$45, custom felt from ~$325) before the Cowboy Bar night.</li>
     <li><b>Easy Teton hikes</b> — <a href="https://www.google.com/maps/search/?api=1&query=Taggart+Lake+Trailhead" target="_blank" rel="noopener">Taggart Lake</a> or <a href="https://www.google.com/maps/search/?api=1&query=Phelps+Lake+Grand+Teton" target="_blank" rel="noopener">Phelps Lake</a>.</li>
     <li><b>Clay / sporting shooting</b> — a classic bachelor add-on; a few outfitters run half-day sessions near town.</li>
     <li><s>Yellowstone</s> — skipped this trip (too far for a day). Noted here so it doesn't get re-litigated. 😉</li>
   </ul>
 
+  <h2 class="sec">📸 Golden-hour &amp; photo spots</h2>
+  <p class="lead">Where everyone shoots the Tetons — soft light in the hour after sunrise or before sunset (~8:45 PM in late July).</p>
+  <ul class="clean">
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Schwabacher+Landing+Grand+Teton" target="_blank" rel="noopener">Schwabacher Landing</a> — the postcard reflection of the range in the beaver ponds; best at sunrise.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton" target="_blank" rel="noopener">Mormon Row / T.A. Moulton barn</a> — Tetons behind the old barns + bison on Antelope Flats; classic for portraits.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton" target="_blank" rel="noopener">Oxbow Bend</a> — Mount Moran mirrored in the Snake River at dawn.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Overlook+Grand+Teton" target="_blank" rel="noopener">Snake River Overlook</a> — the famous Ansel Adams shot; sunset light on the peaks.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Signal+Mountain+Summit+Grand+Teton" target="_blank" rel="noopener">Signal Mountain summit</a> — sunset over the whole valley (already on Friday).</li>
+  </ul>
+
+  <h2 class="sec">Other night ideas — mix it up</h2>
+  <ul class="clean">
+    <li><b>Golden-hour in Grand Teton</b> — stay out for sunset on a park evening: <a href="https://www.google.com/maps/search/?api=1&query=Oxbow+Bend+Grand+Teton" target="_blank" rel="noopener">Oxbow Bend</a> or <a href="https://www.google.com/maps/search/?api=1&query=Mormon+Row+Historic+District+Grand+Teton" target="_blank" rel="noopener">Mormon Row</a> for moose/elk and alpenglow on the range.</li>
+    <li><b>Stargazing from Victor</b> — Teton Valley has big dark skies; grab blankets and look up from the house — no driving.</li>
+    <li><b>Victor night, no pass</b> — <a href="https://www.google.com/maps/search/?api=1&query=Knotty+Pine+Supper+Club+Victor+ID" target="_blank" rel="noopener">Knotty Pine</a> live music + <a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+Brewing+Victor+ID" target="_blank" rel="noopener">Grand Teton Brewing</a>, right in town — skips the late pass drive.</li>
+    <li><b>Hot tub + fire pit at the house</b> — a low-key night in (Teton Springs has pools/hot tubs on site).</li>
+    <li><b>A different Jackson bar</b> — the <a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> (live music) or <a href="https://www.google.com/maps/search/?api=1&query=The+Rose+Jackson+WY" target="_blank" rel="noopener">The Rose</a> (cocktail lounge) for a change from the Cowboy Bar.</li>
+  </ul>
+
   <h2 class="sec">Eats &amp; drinks</h2>
-  <div class="extras-cat">☕ Coffee &amp; breakfast</div>
+  <div class="extras-cat">🏡 Victor &amp; Teton Valley — home base</div>
+  <ul class="clean">
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Butter+Cafe+Victor+ID" target="_blank" rel="noopener">Butter Café</a> · <a href="https://www.google.com/maps/search/?api=1&query=Rise+Coffee+House+Victor+ID" target="_blank" rel="noopener">Rise Coffee House</a> — breakfast + coffee in Victor.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Knotty+Pine+Supper+Club+Victor+ID" target="_blank" rel="noopener">Knotty Pine Supper Club</a> — Victor institution: BBQ, pub fare + live music.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Grand+Teton+Brewing+Victor+ID" target="_blank" rel="noopener">Grand Teton Brewing</a> taproom · <a href="https://www.google.com/maps/search/?api=1&query=Brakeman+American+Grill+Victor+ID" target="_blank" rel="noopener">Brakeman</a> · <a href="https://www.google.com/maps/search/?api=1&query=Chiang+Mai+Thai+Kitchen+Victor+ID" target="_blank" rel="noopener">Chiang Mai Thai</a> · <a href="https://www.google.com/maps/search/?api=1&query=Big+Hole+BBQ+Victor+ID" target="_blank" rel="noopener">Big Hole BBQ</a>.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Victor+Emporium+Victor+ID" target="_blank" rel="noopener">Victor Emporium</a> — old-school soda fountain; get the huckleberry milkshake.</li>
+    <li>10 min north in <b>Driggs</b>: <a href="https://www.google.com/maps/search/?api=1&query=Forage+Bistro+Driggs+ID" target="_blank" rel="noopener">Forage Bistro</a> · <a href="https://www.google.com/maps/search/?api=1&query=Citizen+33+Brewery+Driggs+ID" target="_blank" rel="noopener">Citizen 33 Brewery</a> · <a href="https://www.google.com/maps/search/?api=1&query=Teton+Thai+Driggs+ID" target="_blank" rel="noopener">Teton Thai</a>.</li>
+  </ul>
+  <div class="extras-cat">☕ Coffee &amp; breakfast — Jackson (over the pass)</div>
   <ul class="clean">
     <li><a href="https://www.google.com/maps/search/?api=1&query=Persephone+Bakery+Jackson+WY" target="_blank" rel="noopener">Persephone Bakery</a> — pastries + egg sandwiches; the town go-to.</li>
     <li><a href="https://www.google.com/maps/search/?api=1&query=Cowboy+Coffee+Co+Jackson+WY" target="_blank" rel="noopener">Cowboy Coffee Co.</a> — solid espresso just off the Square.</li>
     <li><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Genevieve+Jackson+WY" target="_blank" rel="noopener">Café Genevieve</a> — brunch in a log cabin; order the "pig candy."</li>
+    <li>Matcha: <a href="https://www.google.com/maps/search/?api=1&query=Picnic+Jackson+WY" target="_blank" rel="noopener">Picnic</a> or <a href="https://www.google.com/maps/search/?api=1&query=Healthy+Being+Cafe+Jackson+WY" target="_blank" rel="noopener">Healthy Being</a> (unsweetened) in Jackson; <a href="https://www.google.com/maps/search/?api=1&query=Butter+Cafe+Victor+ID" target="_blank" rel="noopener">Butter Café</a> or <a href="https://www.google.com/maps/search/?api=1&query=Rise+Coffee+House+Victor+ID" target="_blank" rel="noopener">Rise</a> in Victor.</li>
   </ul>
   <div class="extras-cat">🍽️ Group dinners</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a> — the upscale special-occasion pick.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> / <a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a> — Italian and steak, both great for a group.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a> — wine bar + Spanish tapas.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Merry+Piglets+Jackson+WY" target="_blank" rel="noopener">Merry Piglets</a> — margaritas + Tex-Mex, loud and fun.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a> (upscale, special-occasion — the fine-dining classic).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> (Italian, buzzy + influencer-liked) · <a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a> (steak + bison, locals' favorite).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a> (wine bar + Spanish tapas, small plates).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Merry+Piglets+Jackson+WY" target="_blank" rel="noopener">Merry Piglets</a> (Tex-Mex + margaritas, loud and fun).</li>
   </ul>
   <div class="extras-cat">🍔 Local &amp; cheap</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY" target="_blank" rel="noopener">Hand Fire</a> / <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson" target="_blank" rel="noopener">Pinky G's</a> — wood-fired + late-night slices.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Big+Hole+BBQ+Jackson+WY" target="_blank" rel="noopener">Big Hole BBQ</a> — brisket and ribs to feed a group.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Pizza+Pasta+Moose+WY" target="_blank" rel="noopener">Dornan's</a> — pizza + beer deck in the park (Friday lunch).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Hand+Fire+Pizza+Jackson+WY" target="_blank" rel="noopener">Hand Fire</a> / <a href="https://www.google.com/maps/search/?api=1&query=Pinky+G%27s+Pizzeria+Jackson" target="_blank" rel="noopener">Pinky G's</a> (wood-fired pizza + late-night slices).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Big+Hole+BBQ+Jackson+WY" target="_blank" rel="noopener">Big Hole BBQ</a> (BBQ — brisket + ribs, feeds a crowd).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Dornan%27s+Pizza+Pasta+Moose+WY" target="_blank" rel="noopener">Dornan's</a> (pizza + beer deck with Teton views — Friday lunch).</li>
+    <li><b>Bison burger</b> (locals' choice): <a href="https://www.google.com/maps/search/?api=1&query=Liberty+Burger+Jackson+WY" target="_blank" rel="noopener">Liberty Burger</a> (bison, GF buns) or <a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a>.</li>
   </ul>
   <div class="extras-cat">🍺 Bars &amp; nightlife</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> — saddle stools + mechanical bull.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> — 2,032 silver dollars in the bar top; live music.</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Mangy+Moose+Teton+Village" target="_blank" rel="noopener">Mangy Moose</a> — legendary après bar in Teton Village (pair with the tram).</li>
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Melvin+Brewing+Jackson+WY" target="_blank" rel="noopener">Melvin Brewing / Thai Me Up</a> — award-winning IPAs + Thai food.</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Million+Dollar+Cowboy+Bar+Jackson+WY" target="_blank" rel="noopener">Million Dollar Cowboy Bar</a> (honky-tonk — saddle stools, mechanical bull, dancing).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Silver+Dollar+Bar+Wort+Hotel+Jackson" target="_blank" rel="noopener">Silver Dollar Bar</a> (historic saloon + live music — 2,032 silver dollars in the bar top).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Mangy+Moose+Teton+Village" target="_blank" rel="noopener">Mangy Moose</a> (après bar + live music, Teton Village — pair with the tram).</li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Melvin+Brewing+Jackson+WY" target="_blank" rel="noopener">Melvin Brewing / Thai Me Up</a> (brewery — award-winning IPAs + Thai food).</li>
   </ul>
   <div class="extras-cat">🌾 Gluten-free friendly</div>
   <ul class="clean">
@@ -311,24 +357,60 @@
   </ul>
 </section>
 
+<!-- ================= BOOK ================= -->
+<section class="panel" id="book">
+  <h2 class="sec">✅ To book</h2>
+  <div class="namebar">
+    <span>You are:</span>
+    <select id="whoami">
+      <option value="">pick your name…</option>
+      <option>Cris</option>
+      <option>Olga</option>
+      <option>Lukas</option>
+      <option>Sofia</option>
+      <option>Peter</option>
+      <option>Derick</option>
+    </select>
+    <span class="synced-note">· ticks sync to the whole group</span>
+  </div>
+  <p class="lead">Tick an item once it's booked — it saves for everyone and shows who did it.</p>
+  <div class="extras-cat">Book these</div>
+  <ul class="todo" id="book-list">
+    <li data-item="car"><label><input type="checkbox"> <span><b>Rental car(s) at JAC</b> — essential; July sells out, so book now.<em class="by"></em></span></label></li>
+    <li data-item="float"><label><input type="checkbox"> <span><b>Snake River scenic float</b> (Sat morning) — <a href="https://barkerewing.com/" target="_blank" rel="noopener">reserve at Barker-Ewing →</a><em class="by"></em></span></label></li>
+    <li data-item="hotsprings"><label><input type="checkbox"> <span><b>Astoria Hot Springs session</b> (Sat ~3–5 PM, reservation required) — <a href="https://astoriahotspringspark.org/" target="_blank" rel="noopener">book a 2-hr session →</a><em class="by"></em></span></label></li>
+    <li data-item="glorietta"><label><input type="checkbox"> <span><b>Saturday dinner — Glorietta</b> — <a href="https://www.google.com/search?q=Glorietta+Jackson+Hole+reservations" target="_blank" rel="noopener">reserve ahead (Resy) →</a><em class="by"></em></span></label></li>
+  </ul>
+  <div class="extras-cat">Only if you add it</div>
+  <ul class="todo" id="book-list-opt">
+    <li data-item="viaferrata"><label><input type="checkbox"> <span><b>Via Ferrata</b> (guided, Teton Village) — <a href="https://www.jacksonhole.com/summer-activities/via-ferrata" target="_blank" rel="noopener">book →</a><em class="by"></em></span></label></li>
+    <li data-item="horseback"><label><input type="checkbox"> <span><b>Horseback — Linn Canyon Ranch</b> (Victor) — <a href="https://www.google.com/search?q=Linn+Canyon+Ranch+Victor+Idaho+horseback" target="_blank" rel="noopener">call to book →</a><em class="by"></em></span></label></li>
+    <li data-item="hats"><label><input type="checkbox"> <span><b>Custom cowboy hats</b> — order ahead only if you want them made-to-fit (off-the-rack is walk-in).<em class="by"></em></span></label></li>
+  </ul>
+  <div class="extras-cat">Already sorted</div>
+  <ul class="todo">
+    <li><label><input type="checkbox" checked disabled> <span><b>Flights</b> — United, Jul 23 &amp; 26.</span></label></li>
+    <li><label><input type="checkbox" checked disabled> <span><b>House</b> — Victor, ID (<a href="https://www.vrbo.com/5346734?dateless=true" target="_blank" rel="noopener">VRBO</a>).</span></label></li>
+  </ul>
+  <p class="lead">No booking needed (walk-up): Jenny Lake shuttle, Cowboy Coaster, aerial tram + waffles, the Fair, the Cowboy Bar.</p>
+</section>
+
 <!-- ================= MAP ================= -->
 <section class="panel" id="map">
   <h2 class="sec">Map</h2>
   <p class="lead">Tap a day to trace that day's route. Numbered pins follow the itinerary order; tap any pin to open it in Google Maps.</p>
-  <div class="mapbox">
-    <div class="mapdays">
-      <button class="mapday active" data-day="all">All</button>
-      <button class="mapday" data-day="thu">Thu</button>
-      <button class="mapday" data-day="fri">Fri</button>
-      <button class="mapday" data-day="sat">Sat</button>
-      <button class="mapday" data-day="sun">Sun</button>
-    </div>
-    <div id="map"></div>
+  <div class="daybar">
+    <button class="daybtn active" data-day="all">All</button>
+    <button class="daybtn" data-day="thu">Thu</button>
+    <button class="daybtn" data-day="fri">Fri</button>
+    <button class="daybtn" data-day="sat">Sat</button>
+    <button class="daybtn" data-day="sun">Sun</button>
   </div>
+  <div id="tripmap"></div>
   <div class="legend" style="margin-top:12px">
     <span><i class="dot" style="background:#4a6d8c"></i>Thu · arrive</span>
     <span><i class="dot" style="background:#3f7d5a"></i>Fri · Grand Teton</span>
-    <span><i class="dot" style="background:#c47a2c"></i>Sat · float &amp; rodeo</span>
+    <span><i class="dot" style="background:#c47a2c"></i>Sat · float &amp; night out</span>
     <span><i class="dot" style="background:#5a8aa0"></i>Sun · fly home</span>
     <span><i class="dot" style="background:#6b6257"></i>Optional</span>
   </div>
@@ -336,7 +418,7 @@
   <h2 class="sec">Pinned places</h2>
   <div class="extras-cat">🏡 Base &amp; town</div>
   <ul class="clean">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Town+Square+Jackson+WY" target="_blank" rel="noopener">Town Square</a> · <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds (rodeo)</a></li>
+    <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Hole+Airport" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a> · <a href="https://www.google.com/maps/search/?api=1&query=Town+Square+Jackson+WY" target="_blank" rel="noopener">Town Square</a> · <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds (DJ party)</a></li>
   </ul>
   <div class="extras-cat">🏔️ Grand Teton (Fri)</div>
   <ul class="clean">
@@ -359,46 +441,50 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
   const DAYS={
     thu:{color:'#4a6d8c',stops:[
       ['Jackson Hole Airport (JAC)',43.6035,-110.7377],
-      ['Town Square / house',43.4799,-110.7624],
-      ['Teton County Fairgrounds',43.4757,-110.7666]]},
+      ['Victor, ID (home base)',43.5760,-111.0990]]},
     fri:{color:'#3f7d5a',stops:[
-      ['Town / breakfast',43.4799,-110.7624],
+      ['Victor, ID (home base)',43.5760,-111.0990],
       ['Mormon Row barns',43.6603,-110.6520],
       ['Jenny Lake boat dock',43.7513,-110.7226],
       ['Hidden Falls',43.7561,-110.7430],
       ["Dornan's, Moose — lunch",43.6516,-110.7180],
       ['String Lake',43.7862,-110.7300],
       ['Signal Mountain summit',43.8430,-110.6280],
-      ['Fairgrounds / town — night',43.4757,-110.7666]]},
+      ['Victor, ID (home base)',43.5760,-111.0990]]},
     sat:{color:'#c47a2c',stops:[
-      ['Town / breakfast',43.4799,-110.7624],
+      ['Victor, ID (home base)',43.5760,-111.0990],
       ['Snake River float — Moose',43.6516,-110.7180],
       ['Astoria Hot Springs',43.3163,-110.7735],
-      ['Teton County Fairgrounds — rodeo',43.4757,-110.7666],
-      ['Cowboy Bar — reconverge',43.4805,-110.7625]]},
+      ['Teton County Fairgrounds — DJ party',43.4757,-110.7666],
+      ['Cowboy Bar — dancing + bull',43.4805,-110.7625]]},
     sun:{color:'#5a8aa0',stops:[
-      ['Town / house',43.4799,-110.7624],
+      ['Victor, ID (home base)',43.5760,-111.0990],
       ['Jackson Hole Airport (JAC)',43.6035,-110.7377]]}
   };
   const OPTIONAL=[
     ['Aerial Tram, Teton Village',43.5875,-110.8276],
-    ['Granite Hot Springs',43.4041,-110.4462]
+    ['Granite Hot Springs',43.4041,-110.4462],
+    ['Grand Targhee Resort',43.7897,-110.9583]
   ];
   let map, dayLayers={}, optLayer;
   function mk(name,la,lo,color,num){
-    const q=encodeURIComponent(name.split(' — ')[0].split(' / ')[0]+' Jackson Hole WY');
-    return L.circleMarker([la,lo],{radius:8,weight:2,color:'#fff',fillColor:color,fillOpacity:1})
+    const isID=/Victor|Targhee/.test(name);
+    const q=encodeURIComponent(name.split(' — ')[0].split(' / ')[0]+(isID?' Idaho':' Jackson Hole WY'));
+    const icon=L.divIcon({className:'',iconSize:[24,24],iconAnchor:[12,12],
+      html:'<div style="width:24px;height:24px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45);color:#fff;font:700 12px/20px -apple-system,BlinkMacSystemFont,sans-serif;text-align:center">'+(num||'')+'</div>'});
+    return L.marker([la,lo],{icon:icon})
       .bindPopup('<b>'+(num?num+'. ':'')+name+'</b><br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps →</a>');
   }
   function initMap(){
     if(map || typeof L==='undefined') return;
-    map = L.map('map',{scrollWheelZoom:false}).setView([43.6,-110.72],9);
+    map = L.map('tripmap',{scrollWheelZoom:false}).setView([43.6,-110.72],9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap'}).addTo(map);
     Object.keys(DAYS).forEach(function(k){
       const d=DAYS[k], lg=L.layerGroup(), ll=d.stops.map(function(s){return [s[1],s[2]];});
@@ -408,7 +494,7 @@
     });
     optLayer=L.layerGroup();
     OPTIONAL.forEach(function(s){ mk(s[0]+' (optional)',s[1],s[2],'#6b6257','').addTo(optLayer); });
-    document.querySelectorAll('.mapday').forEach(function(b){
+    document.querySelectorAll('.daybtn').forEach(function(b){
       b.addEventListener('click',function(){ showDay(b.dataset.day); });
     });
     showDay('all');
@@ -422,16 +508,53 @@
     if(day==='all'){ optLayer.addTo(map); OPTIONAL.forEach(function(s){pts.push([s[1],s[2]]);}); }
     else if(optLayer){ map.removeLayer(optLayer); }
     if(pts.length) map.fitBounds(pts,{padding:[30,30]});
-    document.querySelectorAll('.mapday').forEach(function(b){ b.classList.toggle('active', b.dataset.day===day); });
+    document.querySelectorAll('.daybtn').forEach(function(b){ b.classList.toggle('active', b.dataset.day===day); });
   }
+  // ---- Booking checklist (shared via Supabase) ----
+  const SB_URL='https://ajdqascwkbgvcaqrbcaw.supabase.co';
+  const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqZHFhc2N3a2JndmNhcXJiY2F3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MzM1NDgsImV4cCI6MjA5OTIwOTU0OH0.tSHNp62LNupZukR1BpHj-qSDJpj8qsmv3XGzVqC89KQ';
+  let sb=null;
+  function bookRows(){ return document.querySelectorAll('#book-list li, #book-list-opt li'); }
+  function fmtTime(ts){ try{ const d=new Date(ts); return d.toLocaleDateString([],{weekday:'short'})+' '+d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
+  function renderBook(rows){
+    const m={}; (rows||[]).forEach(function(r){ m[r.item_id]=r; });
+    bookRows().forEach(function(li){
+      const id=li.dataset.item, cb=li.querySelector('input'), by=li.querySelector('.by'), r=m[id];
+      if(r && r.done){ cb.checked=true; li.classList.add('done'); by.textContent='✓ booked by '+(r.done_by||'?')+(r.updated_at?' · '+fmtTime(r.updated_at):''); }
+      else { cb.checked=false; li.classList.remove('done'); by.textContent=''; }
+    });
+  }
+  async function refreshBook(){ if(!sb) return; const res=await sb.from('wyoming_bookings').select('*'); if(!res.error) renderBook(res.data); }
+  async function toggleItem(li,cb){
+    const who=document.getElementById('whoami'), name=who?who.value:'';
+    if(cb.checked && !name){ alert('Pick your name at the top first, then tick the box.'); cb.checked=false; return; }
+    const by=li.querySelector('.by');
+    if(cb.checked){ li.classList.add('done'); by.textContent='✓ booked by '+name+' · just now'; } else { li.classList.remove('done'); by.textContent=''; }
+    const row={item_id:li.dataset.item, done:cb.checked, done_by:cb.checked?name:null, updated_at:new Date().toISOString()};
+    const res=await sb.from('wyoming_bookings').upsert(row,{onConflict:'item_id'});
+    if(res.error){ alert('Could not save — check your connection and try again.'); }
+    refreshBook();
+  }
+  function initBook(){
+    if(sb || typeof supabase==='undefined') return;
+    sb=supabase.createClient(SB_URL,SB_KEY);
+    const who=document.getElementById('whoami');
+    if(who){ const saved=localStorage.getItem('wy_name')||''; if(saved) who.value=saved; who.addEventListener('change',function(){ localStorage.setItem('wy_name',who.value); }); }
+    bookRows().forEach(function(li){ const cb=li.querySelector('input'); cb.addEventListener('change',function(){ toggleItem(li,cb); }); });
+    refreshBook();
+    setInterval(refreshBook,15000);
+  }
+
   tabs.forEach(t=>t.addEventListener('click',()=>{
     tabs.forEach(x=>x.classList.remove('active'));
     panels.forEach(p=>p.classList.remove('active'));
     t.classList.add('active');
     document.getElementById(t.dataset.p).classList.add('active');
     if(t.dataset.p==='map'){ initMap(); setTimeout(function(){ if(map) map.invalidateSize(); },60); }
+    if(t.dataset.p==='book'){ initBook(); }
     window.scrollTo({top:0,behavior:'smooth'});
   }));
+  initBook();
 </script>
 </body>
 </html>
