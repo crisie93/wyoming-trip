@@ -107,8 +107,9 @@
   .daybar{display:block;margin:0 0 12px}
   .daybtn{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;font-size:13.5px;padding:6px 15px;border-radius:999px;cursor:pointer;font-family:inherit;margin:0 6px 6px 0}
   .daybtn.active{background:var(--pine);color:#fff;border-color:var(--pine)}
-  .daybtn[data-day="extras"]{margin-left:10px}
-  .daybtn[data-day="extras"].active{background:#7d5ba6;color:#fff;border-color:#7d5ba6}
+  .daybtn[data-day="attractions"]{margin-left:10px}
+  .daybtn[data-day="attractions"].active{background:#7d5ba6;color:#fff;border-color:#7d5ba6}
+  .daybtn[data-day="food"].active{background:#b23b2e;color:#fff;border-color:#b23b2e}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -208,7 +209,7 @@
     <table class="tl">
       <tr class="food"><td class="time">9:00 AM</td><td class="ic">☕</td><td class="desc">Sleep in. Coffee + a real breakfast in Victor — <a href="https://www.google.com/maps/search/?api=1&query=Butter+Cafe+Victor+ID" target="_blank" rel="noopener">Butter Café</a> or <a href="https://www.google.com/maps/search/?api=1&query=Provisions+Local+Kitchen+Victor+ID" target="_blank" rel="noopener">Provisions</a> (Butter does a great matcha). (The float launches from Moose, ~1 hr over the pass — aim to leave by ~9:30.)<span class="note">🎒 Pack today: swimsuit + towel for the float and hot springs, plus a dry change of clothes for dinner after the soak.</span></td></tr>
       <tr class="activity"><td class="time">10:30 AM</td><td class="ic">🚣</td><td class="desc"><b>Snake River scenic float</b> — <a href="https://barkerewing.com/" target="_blank" rel="noopener">Barker-Ewing</a> or <a href="https://www.gtlc.com/activities/rafting-the-snake-river" target="_blank" rel="noopener">Grand Teton Lodge Co.</a>: a calm 10-mile drift through the park, ~3–4 hrs incl. transport, big wildlife odds (moose, eagles, maybe a bear). Zero effort, all payoff.<details class="more"><summary>booking &amp; details</summary><div class="body">~$100–120/person, ~3–4 hrs including the shuttle from town. Departures run mid-morning to afternoon — <b><a href="https://barkerewing.com/" target="_blank" rel="noopener">reserve ahead at Barker-Ewing →</a></b> in July. Life vests provided; bring a layer, hat and sunscreen. Trips launch from Moose inside the park.</div></details></td></tr>
-      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY" target="_blank" rel="noopener">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram" target="_blank" rel="noopener">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free, so ride it for the view.</span><details class="more"><summary>booking &amp; details</summary><div class="body">Reservation required — <a href="https://astoriahotspringspark.org/" target="_blank" rel="noopener">book a 2-hr session →</a> (they start at 9 AM), about $30/adult. Paved access ~20 min south of town, on the Snake River in Hoback Canyon. Bring a towel; swimsuits required.</div></details></td></tr>
+      <tr class="relax"><td class="time">2:30 PM</td><td class="ic">♨️</td><td class="desc"><b>Hot springs soak.</b> <a href="https://www.google.com/maps/search/?api=1&query=Astoria+Hot+Springs+Park+Jackson+WY" target="_blank" rel="noopener">Astoria Hot Springs</a> (~20 min south, paved, on the Snake River). Reserve a ~3–5 PM session ahead.<span class="note">Prefer scenery to convenience? <a href="https://www.google.com/maps/search/?api=1&query=Granite+Hot+Springs+Wyoming" target="_blank" rel="noopener">Granite Hot Springs</a> is prettier but ~1 hr + 10 mi dirt road. Or swap the soak for the <a href="https://www.jacksonhole.com/summer-activities/summer-tram" target="_blank" rel="noopener">aerial tram</a> + Corbet's waffles — heads up, the waffles aren't gluten-free (for Cris).</span><details class="more"><summary>booking &amp; details</summary><div class="body">Reservation required — <a href="https://astoriahotspringspark.org/" target="_blank" rel="noopener">book a 2-hr session →</a> (they start at 9 AM), about $30/adult. Paved access ~20 min south of town, on the Snake River in Hoback Canyon. Bring a towel; swimsuits required.</div></details></td></tr>
       <tr class="logistics"><td class="time">5:30 PM</td><td class="ic">🚿</td><td class="desc">Back to the house, clean up.</td></tr>
       <tr class="food"><td class="time">6:30 PM</td><td class="ic">🍽️</td><td class="desc">Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Glorietta+Jackson+WY" target="_blank" rel="noopener">Glorietta</a> (Italian, on the Square) — or <a href="https://www.google.com/maps/search/?api=1&query=Snake+River+Grill+Jackson+WY" target="_blank" rel="noopener">Snake River Grill</a> / <a href="https://www.google.com/maps/search/?api=1&query=Bin22+Jackson+WY" target="_blank" rel="noopener">Bin22</a>. <a href="https://www.google.com/search?q=Glorietta+Jackson+Hole+reservations" target="_blank" rel="noopener">Reserve ahead →</a></td></tr>
       <tr class="activity"><td class="time">8:00 PM</td><td class="ic">🎧</td><td class="desc"><b>DJ party + carnival</b> at the <a href="https://www.google.com/maps/search/?api=1&query=Teton+County+Fairgrounds+Jackson+WY" target="_blank" rel="noopener">Teton County Fairgrounds</a> — the Fair's late-night DJ set runs 8 PM–midnight.</td></tr>
@@ -351,7 +352,7 @@
     <li><a href="https://www.google.com/maps/search/?api=1&query=Mangy+Moose+Teton+Village" target="_blank" rel="noopener">Mangy Moose</a> (après bar + live music, Teton Village — pair with the tram).</li>
     <li><a href="https://www.google.com/maps/search/?api=1&query=Melvin+Brewing+Jackson+WY" target="_blank" rel="noopener">Melvin Brewing / Thai Me Up</a> (brewery — award-winning IPAs + Thai food).</li>
   </ul>
-  <div class="extras-cat">🌾 Gluten-free friendly</div>
+  <div class="extras-cat">🌾 Gluten-free — for Cris</div>
   <ul class="clean">
     <li><a href="https://www.google.com/maps/search/?api=1&query=Jackson+Drug+Jackson+WY" target="_blank" rel="noopener">Jackson Drug</a> — dedicated GF fryer, most of the menu GF; the safest bet.</li>
     <li><a href="https://www.google.com/maps/search/?api=1&query=Local+Restaurant+Jackson+WY" target="_blank" rel="noopener">Local</a> · <a href="https://www.google.com/maps/search/?api=1&query=Liberty+Burger+Jackson+WY" target="_blank" rel="noopener">Liberty Burger</a> · <a href="https://www.google.com/maps/search/?api=1&query=Thai+Me+Up+Jackson+WY" target="_blank" rel="noopener">Thai Me Up</a> — plenty of GF options.</li>
@@ -400,14 +401,15 @@
 <!-- ================= MAP ================= -->
 <section class="panel" id="map">
   <h2 class="sec">Map</h2>
-  <p class="lead">Tap a day to trace its route (numbered pins follow the itinerary order). Toggle <b>✨ Extras</b> to overlay every optional spot on top — handy for seeing which extras fit a day. Tap any pin to open it in Google Maps.</p>
+  <p class="lead">The numbered day routes are the plan. Toggle <b>✨ Attractions</b> or <b>🍴 Food</b> to overlay <b>alternative options &amp; extras</b> (not part of the set itinerary) — handy for seeing what's near each day. Food is colour-coded: groceries, coffee/snacks, restaurants. Tap any pin to open it in Google Maps.</p>
   <div class="daybar">
     <button class="daybtn active" data-day="all">All</button>
     <button class="daybtn" data-day="thu">Thu</button>
     <button class="daybtn" data-day="fri">Fri</button>
     <button class="daybtn" data-day="sat">Sat</button>
     <button class="daybtn" data-day="sun">Sun</button>
-    <button class="daybtn" data-day="extras">✨ Extras</button>
+    <button class="daybtn" data-day="attractions">✨ Attractions</button>
+    <button class="daybtn" data-day="food">🍴 Food</button>
   </div>
   <div id="tripmap"></div>
   <div class="legend" style="margin-top:12px">
@@ -415,7 +417,10 @@
     <span><i class="dot" style="background:#3f7d5a"></i>Fri · Grand Teton</span>
     <span><i class="dot" style="background:#c47a2c"></i>Sat · float &amp; night out</span>
     <span><i class="dot" style="background:#5a8aa0"></i>Sun · fly home</span>
-    <span><i class="dot" style="background:#7d5ba6"></i>Extras / options</span>
+    <span><i class="dot" style="background:#7d5ba6"></i>Attractions</span>
+    <span><i class="dot" style="background:#4c9a2a"></i>Groceries</span>
+    <span><i class="dot" style="background:#8b5a2b"></i>Coffee/snacks</span>
+    <span><i class="dot" style="background:#c0392b"></i>Restaurants</span>
   </div>
 
   <h2 class="sec">Pinned places</h2>
@@ -450,25 +455,25 @@
   const panels = document.querySelectorAll('.panel');
   const DAYS={
     thu:{color:'#4a6d8c',stops:[
-      ['Jackson Hole Airport (JAC)',43.6035,-110.7377],
+      ['Jackson Hole Airport (JAC)',43.6035,-110.7377,'~40 min · Teton Pass'],
       ['Victor, ID (home base)',43.5760,-111.0990]]},
     fri:{color:'#3f7d5a',stops:[
-      ['Victor, ID (home base)',43.5760,-111.0990],
-      ['Mormon Row barns',43.6603,-110.6520],
-      ['Jenny Lake boat dock',43.7513,-110.7226],
-      ['Hidden Falls',43.7561,-110.7430],
-      ["Dornan's, Moose — lunch",43.6516,-110.7180],
-      ['String Lake',43.7862,-110.7300],
-      ['Signal Mountain summit',43.8430,-110.6280],
+      ['Victor, ID (home base)',43.5760,-111.0990,'~1 hr · Teton Pass'],
+      ['Mormon Row barns',43.6603,-110.6520,'~20 min'],
+      ['Jenny Lake boat dock',43.7513,-110.7226,'boat ~12 min'],
+      ['Hidden Falls',43.7561,-110.7430,'~25 min'],
+      ["Dornan's, Moose — lunch",43.6516,-110.7180,'~15 min'],
+      ['String Lake',43.7862,-110.7300,'~20 min'],
+      ['Signal Mountain summit',43.8430,-110.6280,'~1¼ hr · pass'],
       ['Victor, ID (home base)',43.5760,-111.0990]]},
     sat:{color:'#c47a2c',stops:[
-      ['Victor, ID (home base)',43.5760,-111.0990],
-      ['Snake River float — Moose',43.6516,-110.7180],
-      ['Astoria Hot Springs',43.3163,-110.7735],
-      ['Teton County Fairgrounds — DJ party',43.4757,-110.7666],
+      ['Victor, ID (home base)',43.5760,-111.0990,'~1 hr · Teton Pass'],
+      ['Snake River float — Moose',43.6516,-110.7180,'~50 min'],
+      ['Astoria Hot Springs',43.3163,-110.7735,'~45 min'],
+      ['Teton County Fairgrounds — DJ party',43.4757,-110.7666,'3-min walk'],
       ['Cowboy Bar — dancing + bull',43.4805,-110.7625]]},
     sun:{color:'#5a8aa0',stops:[
-      ['Victor, ID (home base)',43.5760,-111.0990],
+      ['Victor, ID (home base)',43.5760,-111.0990,'~40 min · Teton Pass'],
       ['Jackson Hole Airport (JAC)',43.6035,-110.7377]]}
   };
   const EXTRAS=[
@@ -489,30 +494,74 @@
     ['Jackson Lake Lodge',43.8650,-110.5900],
     ['Knotty Pine — Victor',43.6027,-111.1113]
   ];
-  let map, dayLayers={}, extrasLayer, curDay='all', extrasOn=false;
+  const FOODCOLORS={g:'#4c9a2a',c:'#8b5a2b',r:'#c0392b'};
+  const FOOD=[
+    ["Broulim's — groceries (Victor)",43.6045,-111.1160,'g'],
+    ['Victor Valley Market — groceries',43.6030,-111.1105,'g'],
+    ['Jackson Whole Grocer — groceries',43.4712,-110.7630,'g'],
+    ['Butter Café — coffee (Victor)',43.6100,-111.1105,'c'],
+    ['Rise Coffee House — coffee (Victor)',43.6035,-111.1125,'c'],
+    ['Victor Emporium — shakes (Victor)',43.6025,-111.1112,'c'],
+    ['Persephone Bakery — Jackson',43.4788,-110.7618,'c'],
+    ['Cowboy Coffee Co. — Jackson',43.4806,-110.7632,'c'],
+    ['Café Genevieve — brunch (Jackson)',43.4796,-110.7612,'c'],
+    ['Picnic — coffee/matcha (Jackson)',43.4852,-110.7745,'c'],
+    ['Healthy Being — juicery (Jackson)',43.4800,-110.7628,'c'],
+    ['Snake River Grill — Jackson',43.4801,-110.7627,'r'],
+    ['Glorietta — Italian (Jackson)',43.4809,-110.7630,'r'],
+    ['Local — steak/bison (Jackson)',43.4803,-110.7624,'r'],
+    ['Bin22 — wine bar (Jackson)',43.4796,-110.7638,'r'],
+    ['Merry Piglets — Tex-Mex (Jackson)',43.4810,-110.7637,'r'],
+    ['Hand Fire Pizza — Jackson',43.4816,-110.7623,'r'],
+    ["Pinky G's Pizzeria — Jackson",43.4807,-110.7617,'r'],
+    ['Liberty Burger — bison (Jackson)',43.4788,-110.7598,'r'],
+    ['Big Hole BBQ — Jackson',43.4675,-110.7880,'r'],
+    ["Dornan's — Moose",43.6516,-110.7180,'r'],
+    ['Knotty Pine — Victor',43.6027,-111.1113,'r'],
+    ['Grand Teton Brewing — Victor',43.6018,-111.1155,'r'],
+    ['Brakeman American Grill — Victor',43.6038,-111.1122,'r'],
+    ['Chiang Mai Thai — Victor',43.6042,-111.1132,'r'],
+    ['Forage Bistro — Driggs',43.7228,-111.1112,'r'],
+    ['Citizen 33 Brewery — Driggs',43.7236,-111.1102,'r'],
+    ['Teton Thai — Driggs',43.7242,-111.1122,'r']
+  ];
+  let map, dayLayers={}, dayLegs={}, extrasLayer, foodLayer, curDay='all', attractionsOn=false, foodOn=false;
   function mk(name,la,lo,color,num){
-    const isID=/Victor|Targhee/.test(name);
+    const isID=/Victor|Targhee|Driggs/.test(name);
     const q=encodeURIComponent(name.split(' — ')[0].split(' / ')[0]+(isID?' Idaho':' Jackson Hole WY'));
     const icon=L.divIcon({className:'',iconSize:[24,24],iconAnchor:[12,12],
       html:'<div style="width:24px;height:24px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45);color:#fff;font:700 12px/20px -apple-system,BlinkMacSystemFont,sans-serif;text-align:center">'+(num||'')+'</div>'});
     return L.marker([la,lo],{icon:icon})
       .bindPopup('<b>'+(num?num+'. ':'')+name+'</b><br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps →</a>');
   }
+  function legLabel(latlng,label,color){
+    const w=Math.round(Math.max(48,label.length*6.4));
+    const icon=L.divIcon({className:'',iconSize:[w,18],iconAnchor:[w/2,9],
+      html:'<div style="width:'+w+'px;background:#fffef9;border:1px solid '+color+';color:'+color+';font:700 10px/16px -apple-system,BlinkMacSystemFont,sans-serif;border-radius:9px;text-align:center;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.22)">'+label+'</div>'});
+    return L.marker(latlng,{icon:icon,interactive:false});
+  }
   function initMap(){
     if(map || typeof L==='undefined') return;
     map = L.map('tripmap',{scrollWheelZoom:false}).setView([43.6,-110.72],9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap'}).addTo(map);
     Object.keys(DAYS).forEach(function(k){
-      const d=DAYS[k], lg=L.layerGroup(), ll=d.stops.map(function(s){return [s[1],s[2]];});
+      const d=DAYS[k], lg=L.layerGroup(), legs=L.layerGroup(), ll=d.stops.map(function(s){return [s[1],s[2]];});
       L.polyline(ll,{color:d.color,weight:3,opacity:.75,dashArray:'6,7'}).addTo(lg);
-      d.stops.forEach(function(s,i){ mk(s[0],s[1],s[2],d.color,i+1).addTo(lg); });
-      dayLayers[k]=lg;
+      d.stops.forEach(function(s,i){
+        mk(s[0],s[1],s[2],d.color,i+1).addTo(lg);
+        const nx=d.stops[i+1];
+        if(s[3] && nx){ legLabel([(s[1]+nx[1])/2,(s[2]+nx[2])/2],s[3],d.color).addTo(legs); }
+      });
+      dayLayers[k]=lg; dayLegs[k]=legs;
     });
     extrasLayer=L.layerGroup();
     EXTRAS.forEach(function(s){ mk(s[0],s[1],s[2],'#7d5ba6','').addTo(extrasLayer); });
+    foodLayer=L.layerGroup();
+    FOOD.forEach(function(s){ mk(s[0],s[1],s[2],FOODCOLORS[s[3]],'').addTo(foodLayer); });
     document.querySelectorAll('.daybtn').forEach(function(b){
       b.addEventListener('click',function(){
-        if(b.dataset.day==='extras'){ extrasOn=!extrasOn; renderMap(false); }
+        if(b.dataset.day==='attractions'){ attractionsOn=!attractionsOn; renderMap(false); }
+        else if(b.dataset.day==='food'){ foodOn=!foodOn; renderMap(false); }
         else { curDay=b.dataset.day; renderMap(true); }
       });
     });
@@ -523,10 +572,13 @@
     Object.keys(DAYS).forEach(function(k){
       if(curDay==='all'||curDay===k){ dayLayers[k].addTo(map); DAYS[k].stops.forEach(function(s){pts.push([s[1],s[2]]);}); }
       else { map.removeLayer(dayLayers[k]); }
+      if(curDay===k){ dayLegs[k].addTo(map); } else { map.removeLayer(dayLegs[k]); }
     });
-    if(extrasOn){ extrasLayer.addTo(map); } else { map.removeLayer(extrasLayer); }
+    if(attractionsOn){ extrasLayer.addTo(map); } else { map.removeLayer(extrasLayer); }
+    if(foodOn){ foodLayer.addTo(map); } else { map.removeLayer(foodLayer); }
     document.querySelectorAll('.daybtn').forEach(function(b){
-      if(b.dataset.day==='extras'){ b.classList.toggle('active', extrasOn); }
+      if(b.dataset.day==='attractions'){ b.classList.toggle('active', attractionsOn); }
+      else if(b.dataset.day==='food'){ b.classList.toggle('active', foodOn); }
       else { b.classList.toggle('active', b.dataset.day===curDay); }
     });
     if(fit && pts.length) map.fitBounds(pts,{padding:[30,30]});
